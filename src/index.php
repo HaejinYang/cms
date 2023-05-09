@@ -156,29 +156,33 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                                <?php
+                                    require_once $_SERVER['DOCUMENT_ROOT'].'/db/db.php';
+                                    $result = DB::query("SELECT * FROM category");
+
+                                    $el = '';
+                                    while($row = $result->fetch_assoc()) {
+                                        $li = "<li><a href=\"#\">{$row['title']}</a></li>";
+                                        $el .= $li;
+                                    }
+
+                                    echo $el;
+                                ?>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
+<!--                        <div class="col-lg-6">-->
+<!--                            <ul class="list-unstyled">-->
+<!--                                <li><a href="#">Category Name</a>-->
+<!--                                </li>-->
+<!--                                <li><a href="#">Category Name</a>-->
+<!--                                </li>-->
+<!--                                <li><a href="#">Category Name</a>-->
+<!--                                </li>-->
+<!--                                <li><a href="#">Category Name</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                         <!-- /.col-lg-6 -->
                     </div>
                     <!-- /.row -->
