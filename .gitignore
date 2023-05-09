@@ -2,3 +2,4 @@
 /docker/mysql
 .env
 /src/vendor
+/src/images
