@@ -14,9 +14,9 @@ class DB
             if (self::$instance->connect_errno) {
                 throw new Exception('dberror: ' . self::$instance->connect_errno);
             }
-
-            return self::$instance;
         }
+
+        return self::$instance;
     }
 
     public static function __callStatic($method, $args)
