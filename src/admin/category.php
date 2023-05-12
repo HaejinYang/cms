@@ -19,16 +19,15 @@
                     <div class="col-xs-6">
                         <?php
                         require_once "../db/db.php";
+                        require_once './model/category.php';
+
                         if (isset($_POST['add'])) {
                             $title = $_POST['title'];
 
                             if (empty($title)) {
                                 echo "빈 칸을 채워주세요";
                             } else {
-                                $query = "INSERT INTO category(title) VALUES(?)";
-                                $stmt = DB::prepare($query);
-                                $stmt->bind_param("s", $title);
-                                $result = $stmt->execute();
+                                Category::create($title);
                             }
                         }
                         ?>
@@ -46,18 +45,12 @@
 
                         // update category
                         require_once './update.php';
-                        
+                        require_once './model/category.php';
+
                         // edit cateogry
                         if (isset($_GET['edit'])) {
                             $id = $_GET['edit'];
-                            $query = "SELECT * FROM category WHERE id = ?";
-                            $stmt = DB::prepare($query);
-                            $stmt->bind_param("i", $id);
-                            if ($stmt->execute()) {
-                                $result = $stmt->get_result();
-                                $row = $result->fetch_assoc();
-                                $title = $row['title'];
-                            }
+                            $title = Category::read($id);
                         }
                         ?>
                         <form action="" method="post">
@@ -89,19 +82,17 @@
                             <tbody>
                             <?php
                             require_once '../db/db.php';
+                            require_once './model/category.php';
 
                             // delete category
                             if (isset($_GET['delete'])) {
                                 $id = $_GET['delete'];
-                                $query = "DELETE FROM category WHERE id = ?";
-                                $stmt = DB::prepare($query);
-                                $stmt->bind_param("i", $id);
-                                $stmt->execute();
+                                Category::delete($id);
                                 header("Location: category.php");
                             }
 
                             // find all category
-                            $result = DB::query("SELECT * FROM category");
+                            $result = Category::readAll();
                             $el = "";
                             while ($row = $result->fetch_assoc()) {
                                 $html = "

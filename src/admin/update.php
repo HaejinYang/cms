@@ -1,5 +1,6 @@
 <?php
 require_once '../db/db.php';
+require_once './model/category.php';
 
 // update category
 if (isset($_POST['update']) && isset($_GET['edit'])) {
@@ -7,10 +8,7 @@ if (isset($_POST['update']) && isset($_GET['edit'])) {
     $title = $_POST['title'];
 
     if (!(empty($id) || empty($title))) {
-        $query = "UPDATE category SET title=? WHERE id=?";
-        $stmt = DB::prepare($query);
-        $stmt->bind_param("si", $title, $id);
-        $stmt->execute();
+        Category::update($id, $title);
 
         header("Location: category.php");
     }
