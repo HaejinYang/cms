@@ -52,7 +52,7 @@
                 </ul>
             </li>
             <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> 카테고리</a>
+                <a href="category.php"><i class="fa fa-fw fa-wrench"></i> 카테고리</a>
             </li>
             <li>
                 <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> 댓글</a>
