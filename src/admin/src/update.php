@@ -1,5 +1,5 @@
 <?php
-require_once 'model/category.php';
+require_once __DIR__ . '/model/category.php';
 
 // update category
 if (isset($_POST['update']) && isset($_GET['edit'])) {
