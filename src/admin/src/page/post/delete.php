@@ -1,7 +1,5 @@
 <?php
 
-use model\Post;
-
 do {
     if (!isset($_GET['id'])) {
         break;

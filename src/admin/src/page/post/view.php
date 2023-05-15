@@ -1,8 +1,5 @@
 <?php
 
-use model\Category;
-use model\Post;
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
 
 <div id="wrapper">

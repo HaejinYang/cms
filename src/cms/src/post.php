@@ -1,15 +1,16 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/db/db.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 $result = '';
 
-if(isset($_POST['search'])) {
+if (isset($_POST['search'])) {
     $result = DB::query("SELECT * FROM post WHERE tags LIKE '%{$_POST['search']}%'");
 } else {
     $result = DB::query("SELECT * FROM post");
 }
 
 $el = "";
-while($post = $result->fetch_assoc()) {
+while ($post = $result->fetch_assoc()) {
     $html = <<<EOT
                             <h2>
                                 <a href="#">{$post['title']}</a>

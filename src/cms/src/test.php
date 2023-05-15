@@ -1,5 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/db/db.php');
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/db/db.php');
 
 $result = DB::query("SELECT * FROM category");
 

@@ -1,4 +1,4 @@
-<?php use model\Category;
+<?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
 <div id="wrapper">

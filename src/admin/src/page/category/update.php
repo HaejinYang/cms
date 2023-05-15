@@ -1,7 +1,5 @@
 <?php
 
-use model\Category;
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
 // update category

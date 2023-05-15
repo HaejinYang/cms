@@ -1,7 +1,5 @@
 <?php
 
-use model\Post;
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
 if (isset($_POST['edit'])) {
