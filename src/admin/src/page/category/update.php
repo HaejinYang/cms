@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/model/category.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
 
 // update category
 if (isset($_POST['update']) && isset($_GET['edit'])) {
@@ -9,6 +9,6 @@ if (isset($_POST['update']) && isset($_GET['edit'])) {
     if (!(empty($id) || empty($title))) {
         Category::update($id, $title);
 
-        header("Location: category.php");
+        header("Location: index.php");
     }
 }
