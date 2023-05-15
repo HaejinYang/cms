@@ -1,10 +1,8 @@
-<?php
-require_once 'header.php' ?>
-
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once 'navigation.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/navigation.php'; ?>
 
     <div id="page-wrapper">
 
@@ -19,7 +17,7 @@ require_once 'header.php' ?>
                     </h1>
                     <div class="col-xs-6">
                         <?php
-                        require_once 'model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
 
                         if (isset($_POST['add'])) {
                             $title = $_POST['title'];
@@ -42,8 +40,8 @@ require_once 'header.php' ?>
                         </form>
                         <?php
                         // update category
-                        require_once 'update.php';
-                        require_once 'model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/page/category/update.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
 
                         // edit cateogry
                         if (isset($_GET['edit'])) {
@@ -66,7 +64,7 @@ require_once 'header.php' ?>
                         </form>
                     </div>
                     <div class="col-xs-6">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>
@@ -79,7 +77,7 @@ require_once 'header.php' ?>
                             </thead>
                             <tbody>
                             <?php
-                            require_once 'model/category.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
 
                             // delete category
                             if (isset($_GET['delete'])) {
@@ -101,10 +99,10 @@ require_once 'header.php' ?>
                                     {$row['title']}
                                     </td>
                                     <td>
-                                    <a href='category.php?delete={$row['id']}'>삭제</a>
+                                    <a href='index.php?delete={$row['id']}'>삭제</a>
                                     </td>
                                     <td>
-                                    <a href='category.php?edit={$row['id']}'>수정</a>
+                                    <a href='index.php?edit={$row['id']}'>수정</a>
                                     </td>
                                     </tr>
                                     ";
@@ -127,4 +125,4 @@ require_once 'header.php' ?>
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once 'footer.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/footer.php' ?>

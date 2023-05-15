@@ -1,9 +1,9 @@
-<?php require_once 'src/header.php' ?>
+<?php require_once __DIR__ . '/src/header.php' ?>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once 'src/navigation.php' ?>
+    <?php require_once __DIR__ . '/src/navigation.php' ?>
 
     <div id="page-wrapper">
 
@@ -18,7 +18,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
+                            <i class="fa fa-dashboard"></i> <a href="/admin/index.php">Dashboard</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-file"></i> Blank Page
@@ -34,4 +34,4 @@
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once 'src/footer.php' ?>
+    <?php require_once __DIR__ . '/src/footer.php' ?>

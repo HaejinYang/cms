@@ -1,6 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 
+/*
+ * psr: class name PascalNaming, method camelCase, constant CONSTANT_NAME,
+ * property, variable not defined. 그런데, 구별을 위해 스네이크가 나아보임.
+ */
+
 class Category extends DB
 {
     public static function create($title): bool
