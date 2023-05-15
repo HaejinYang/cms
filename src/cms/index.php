@@ -2,7 +2,7 @@
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/header.php'; ?>
 
 <!-- Navigation -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src//navigation.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/navigation.php'; ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -31,7 +31,7 @@
                 $content = substr($row['content'], 0, 10) . "...";
                 $html = <<<EOT
                 <h2>
-                <a href="#">{$row['title']}</a>
+                <a href="/cms/src/post.php?id={$row['id']}">{$row['title']}</a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php">{$row['author']}</a>
@@ -62,9 +62,9 @@ EOT;
         </div>
 
         <!-- Blog Sidebar Widgets Column -->
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src//sidebar.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/sidebar.php' ?>
     </div>
     <!-- /.row -->
     <hr>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src//footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/footer.php'; ?>

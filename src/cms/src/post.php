@@ -1,33 +1,102 @@
-<?php
+<!-- header -->
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/header.php'; ?>
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
-$result = '';
+<!-- Navigation -->
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/navigation.php'; ?>
 
-if (isset($_POST['search'])) {
-    $result = DB::query("SELECT * FROM post WHERE tags LIKE '%{$_POST['search']}%'");
-} else {
-    $result = DB::query("SELECT * FROM post");
-}
+<!-- Page Content -->
+<div class="container">
 
-$el = "";
-while ($post = $result->fetch_assoc()) {
-    $html = <<<EOT
-                            <h2>
-                                <a href="#">{$post['title']}</a>
-                            </h2>
-                            <p class="lead">
-                                    by <a href="index.php">{$post['author']}</a>
-                            </p>
-                            <p><span class="glyphicon glyphicon-time"></span> Posted on {$post['date']}</p>
-                            <hr>
-                            <img class="img-responsive" src="{$post['image']}" alt="">
-                            <hr>
-                            <p>{$post['content']}</p>
-                            <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <!-- Blog Post -->
+            <?php
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $post = new Post();
+                $row = $post->read($id);
+                $content = $row['content'];
+                $html = <<<EOT
+                        <h1>{$row['title']}</h1>
+                        <p class="lead">
+                            by {$row['author']}
+                        </p>
+                        
+                        <hr>
+                        
+                        <p><span class="glyphicon glyphicon-time"></span> Posted on {$row['date']}</p>
+                        
+                        <hr>
+                        
+                        <img class="img-responsive" src="/{$row['image']}" alt="">
+                        
+                        <hr>
+                        
+                        <p>{$content}</p>
+                        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
             
-                            <hr>
+                        <hr>
 EOT;
-    $el .= $html;
-}
+                echo $html;
+            }
+            ?>
 
-echo $el;
+            <!-- Posted Comments -->
+
+            <!-- Comment -->
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="http://placehold.it/64x64" alt="">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Start Bootstrap
+                        <small>August 25, 2014 at 9:30 PM</small>
+                    </h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+
+            <!-- Comment -->
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="http://placehold.it/64x64" alt="">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Start Bootstrap
+                        <small>August 25, 2014 at 9:30 PM</small>
+                    </h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    <!-- Nested Comment -->
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Nested Start Bootstrap
+                                <small>August 25, 2014 at 9:30 PM</small>
+                            </h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce
+                            condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
+                    </div>
+                    <!-- End Nested Comment -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Blog Sidebar Widgets Column -->
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/sidebar.php' ?>
+    </div>
+    <!-- /.row -->
+    <hr>
+
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/footer.php'; ?>
