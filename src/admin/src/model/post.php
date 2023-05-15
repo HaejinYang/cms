@@ -9,9 +9,19 @@ class Post extends DB
         $this->result = null;
     }
 
-    public function create($title, $category_id, $author, )
+    public function create(string $title, int $category_id, string $author, string $status, string $tags,
+                           string $content, string $image, string $image_temp_path, string $date, string $comment_count): bool
     {
+        $image_path = 'images/' . $image;
+        $query = "INSERT INTO post(title, category_id, author, status, tags, content, image, date, comment_count) 
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("sissssssi", $title, $category_id, $author, $status, $tags, $content, $image_path, $date, $comment_count);
+        $result = $stmt->execute();
 
+        move_uploaded_file($image_temp_path, $_SERVER['DOCUMENT_ROOT'] . '/images/' . $image);
+
+        return $result;
     }
 
     public function read(int $id): bool|array
@@ -51,13 +61,40 @@ class Post extends DB
         return $row;
     }
 
-    public function update()
+    /*
+     * 이미지가 변경되지 않았다면, $image_temp_path에 빈문자열 대입
+     */
+    public function update(int    $id, string $title, int $category_id, string $author, string $status, string $tags,
+                           string $content, string $date, string $comment_count): bool
     {
+        $query = "UPDATE post SET title = ?, category_id = ?, author = ?, status = ?, tags = ?, content = ?, date = ?, comment_count = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("sisssssii", $title, $category_id, $author, $status, $tags, $content, $date, $comment_count, $id);
+        $result = $stmt->execute();
 
+        return $result;
     }
 
-    public function delete()
+    public function updateWithImage(int    $id, string $title, int $category_id, string $author, string $status, string $tags,
+                                    string $content, string $image, string $image_temp_path, string $date, string $comment_count): bool
     {
+        $image_path = 'images/' . $image;
+        $query = "UPDATE post SET title = ?, category_id = ?, author = ?, status = ?, tags = ?, content = ?, image = ?, date = ?, comment_count = ? WHERE id = ?";
 
+        $stmt = self::prepare($query);
+        $stmt->bind_param("sissssssii", $title, $category_id, $author, $status, $tags, $content, $image_path, $date, $comment_count, $id);
+        $result = $stmt->execute();
+
+        move_uploaded_file($image_temp_path, $_SERVER['DOCUMENT_ROOT'] . '/images/' . $image);
+
+        return $result;
+    }
+
+    public function delete(int $id)
+    {
+        $query = "DELETE FROM post WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 }

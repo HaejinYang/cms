@@ -3,12 +3,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
 
 class CategoryViewer
 {
-    public static function viewInSelect()
+    public static function viewInSelect(int $focus_id)
     {
         $result = Category::readAll();
-        $el = "<select name='category' id='category'>";
+        $el = "<select name='category_id' id='category_id'>";
         while ($row = $result->fetch_assoc()) {
-            $html = "<option value='{$row['id']}'>{$row['title']}</option>";
+            $html = "<option value={$row['id']}";
+            if ($row['id'] == $focus_id) {
+                $html .= " selected";
+            }
+            $html .= ">{$row['title']}</option>";
             $el .= $html;
         }
 

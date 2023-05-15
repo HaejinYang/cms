@@ -7,11 +7,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">CMS Admin</a>
+        <a class="navbar-brand" href="/admin/index.php">CMS Admin</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
-        <li><a href="../index.php">HOME SITE</a></li>
+        <li><a href="/index.php">HOME SITE</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
                     class="caret"></b></a>
@@ -44,15 +44,15 @@
                     게시글 <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                     <li>
-                        <a href="/admin/src/post.php"> 모든 게시글 보기</a>
+                        <a href="/admin/src/page/post/view.php"> 모든 게시글 보기</a>
                     </li>
                     <li>
-                        <a href="#"> 게시글 추가</a>
+                        <a href="/admin/src/page/post/add.php"> 게시글 추가</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="/admin/src/category.php"><i class="fa fa-fw fa-wrench"></i> 카테고리</a>
+                <a href="/admin/src/page/category/index.php"><i class="fa fa-fw fa-wrench"></i> 카테고리</a>
             </li>
             <li>
                 <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> 댓글</a>
