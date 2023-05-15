@@ -1,4 +1,9 @@
 <?php
+
+namespace model;
+
+use DB;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 
 /*

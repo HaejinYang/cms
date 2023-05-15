@@ -1,4 +1,6 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
+<?php use model\Category;
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
 <div id="wrapper">
 
     <!-- Navigation -->
@@ -17,7 +19,7 @@
                     </h1>
                     <div class="col-xs-6">
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                         if (isset($_POST['add'])) {
                             $title = $_POST['title'];
@@ -41,7 +43,7 @@
                         <?php
                         // update category
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/page/category/update.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                         // edit cateogry
                         if (isset($_GET['edit'])) {
@@ -77,7 +79,7 @@
                             </thead>
                             <tbody>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                             // delete category
                             if (isset($_GET['delete'])) {

@@ -1,5 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/post.php';
+
+use model\Post;
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
 if (isset($_POST['create'])) {
     $post = new Post();

@@ -1,4 +1,8 @@
 <?php
+
+use model\Category;
+use model\Post;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
 
 <div id="wrapper">
@@ -33,8 +37,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
                         </thead>
                         <tbody>
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/post.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
                         $post = new Post();
                         $post->readAll();
                         $el = "";
