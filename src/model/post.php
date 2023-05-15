@@ -1,7 +1,4 @@
-<?php namespace model;
-
-use DB;
-
+<?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 
 class Post extends DB
