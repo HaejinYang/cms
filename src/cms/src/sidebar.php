@@ -28,7 +28,7 @@
 
                     $el = '';
                     while ($row = $result->fetch_assoc()) {
-                        $li = "<li><a href=\"#\">{$row['title']}</a></li>";
+                        $li = "<li><a href='/cms/src/'>{$row['title']}</a></li>";
                         $el .= $li;
                     }
 

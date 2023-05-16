@@ -41,7 +41,7 @@
                 <img class="img-responsive" src="/{$row['image']}" alt="">
                 <hr>
                 <p>{$content}</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="/cms/src/post.php?id={$row['id']}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 EOT;
