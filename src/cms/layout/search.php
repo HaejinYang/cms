@@ -1,8 +1,8 @@
 <!-- header -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/header.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/header.php'; ?>
 
 <!-- Navigation -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/navigation.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/navigation.php'; ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -16,7 +16,7 @@
                 <small>Secondary Text</small>
             </h1>
 
-            <?php require_once $_SERVER['DOCUMENT_ROOT'].'/post.php' ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/index.php' ?>
 
             <!-- Pager -->
             <ul class="pager">
@@ -36,4 +36,4 @@
     <!-- /.row -->
     <hr>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/footer.php'; ?>

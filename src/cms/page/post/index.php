@@ -1,8 +1,8 @@
 <!-- header -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/header.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/header.php'; ?>
 
 <!-- Navigation -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/navigation.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/navigation.php'; ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -93,9 +93,9 @@ EOT;
         </div>
 
         <!-- Blog Sidebar Widgets Column -->
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/sidebar.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/sidebar.php' ?>
     </div>
     <!-- /.row -->
     <hr>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/src/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/footer.php'; ?>

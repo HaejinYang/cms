@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/index.php';
 
 if (isset($_POST['create'])) {
     $post = new Post();
@@ -12,12 +12,12 @@ if (isset($_POST['create'])) {
 ?>
 
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/header.php' ?>
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/navigation.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/navigation.php' ?>
 
     <div id="page-wrapper">
 
@@ -85,4 +85,4 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/header.php' ?>
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/footer.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/footer.php' ?>
