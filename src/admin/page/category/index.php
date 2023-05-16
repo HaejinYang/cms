@@ -1,10 +1,10 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/header.php'; ?>
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/navigation.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/navigation.php'; ?>
 
     <div id="page-wrapper">
 
@@ -42,7 +42,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
                         </form>
                         <?php
                         // update category
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/page/category/update.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/update.php';
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                         // edit cateogry
@@ -127,4 +127,4 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/footer.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/footer.php' ?>

@@ -1,11 +1,11 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/header.php' ?>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/navigation.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/navigation.php' ?>
 
     <div id="page-wrapper">
 
@@ -52,8 +52,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
                                         <td>{$row['tags']}</td>
                                         <td>{$row['comment_count']}</td>
                                         <td>{$row['date']}</td>
-                                        <td><a href='/admin/src/page/post/delete.php?id={$row['id']}'>삭제</a></td>
-                                        <td><a href='/admin/src/page/post/edit.php?id={$row['id']}'>수정</a></td>
+                                        <td><a href='/admin/page/post/delete.php?id={$row['id']}'>삭제</a></td>
+                                        <td><a href='/admin/page/post/edit.php?id={$row['id']}'>수정</a></td>
                                     </tr>";
                             $el .= $html;
                         }
@@ -74,6 +74,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/footer.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/footer.php' ?>
 
 

@@ -12,4 +12,4 @@ do {
 
 } while (false);
 
-header("Location: /admin/src/page/post/view.php");
+header("Location: /admin/page/post/view.php");

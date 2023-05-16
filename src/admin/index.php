@@ -1,9 +1,9 @@
-<?php require_once __DIR__ . '/src/header.php' ?>
+<?php require_once __DIR__ . '/header.php' ?>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once __DIR__ . '/src/navigation.php' ?>
+    <?php require_once __DIR__ . '/navigation.php' ?>
 
     <div id="page-wrapper">
 
@@ -34,4 +34,4 @@
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once __DIR__ . '/src/footer.php' ?>
+    <?php require_once __DIR__ . '/footer.php' ?>
