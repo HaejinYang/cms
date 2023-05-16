@@ -14,8 +14,8 @@
             <!-- Blog Post -->
             <?php
             require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
+            if (isset($_GET['post_id'])) {
+                $id = $_GET['post_id'];
                 $post = new Post();
                 $row = $post->read($id);
                 $content = $row['content'];
@@ -43,6 +43,39 @@ EOT;
             }
             ?>
 
+            <?php
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+            if (isset($_GET['category_id'])) {
+                $id = $_GET['category_id'];
+                $post = new Post();
+                $post->readByCategoryId($id);
+                $el = "";
+                while ($row = $post->next()) {
+                    $html = <<<EOT
+                        <h1>{$row['title']}</h1>
+                        <p class="lead">
+                            by {$row['author']}
+                        </p>
+                        
+                        <hr>
+                        
+                        <p><span class="glyphicon glyphicon-time"></span> Posted on {$row['date']}</p>
+                        
+                        <hr>
+                        
+                        <img class="img-responsive" src="/{$row['image']}" alt="">
+                        
+                        <hr>
+                        
+                        <p>{$content}</p>
+            
+                        <hr>
+EOT;
+                }
+
+                echo $html;
+            }
+            ?>
             <!-- Posted Comments -->
 
             <!-- Comment -->

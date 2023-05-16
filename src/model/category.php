@@ -40,6 +40,11 @@ class Category extends DB
         return self::query("SELECT * FROM category");
     }
 
+    public static function readLimit(int $limit)
+    {
+        return self::query("SELECT * FROM category LIMIT {$limit}");
+    }
+
     public static function update(int $id, string $title): bool
     {
         $query = "UPDATE category SET title=? WHERE id=?";

@@ -22,17 +22,10 @@
             <div class="col-lg-12">
                 <ul class="list-unstyled">
                     <?php
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/category/view.php';
 
-                    require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
-                    $result = DB::query("SELECT * FROM category LIMIT 3");
+                    echo CategoryViewer::viewInList(3);
 
-                    $el = '';
-                    while ($row = $result->fetch_assoc()) {
-                        $li = "<li><a href='/cms/layout/'>{$row['title']}</a></li>";
-                        $el .= $li;
-                    }
-
-                    echo $el;
                     ?>
                 </ul>
             </div>
