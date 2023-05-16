@@ -1,8 +1,10 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php'; ?>
+<?php
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/navigation.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/navigation.php'; ?>
 
     <div id="page-wrapper">
 
@@ -17,7 +19,7 @@
                     </h1>
                     <div class="col-xs-6">
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                         if (isset($_POST['add'])) {
                             $title = $_POST['title'];
@@ -40,8 +42,8 @@
                         </form>
                         <?php
                         // update category
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/page/category/update.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/update.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                         // edit cateogry
                         if (isset($_GET['edit'])) {
@@ -77,7 +79,7 @@
                             </thead>
                             <tbody>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
                             // delete category
                             if (isset($_GET['delete'])) {
@@ -125,4 +127,4 @@
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/footer.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/footer.php' ?>

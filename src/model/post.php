@@ -1,4 +1,6 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
+<?php
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 
 class Post extends DB
 {
@@ -38,7 +40,21 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result->fetch_assoc();
     }
 
-    public function readAll()
+    public function readByCategoryId(int $id): Post
+    {
+        $stmt = self::prepare("SELECT * FROM post WHERE category_id = ?");
+        $stmt->bind_param("i", $id);
+        $isSuccess = $stmt->execute();
+        if (!$isSuccess) {
+            return false;
+        }
+
+        $this->result = $stmt->get_result();
+
+        return $this;
+    }
+
+    public function readAll(): Post
     {
         $this->result = self::query("SELECT * FROM post");
 

@@ -5,11 +5,11 @@ do {
         break;
     }
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/post.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
     $post = new Post();
     $post->delete($_GET['id']);
 
 } while (false);
 
-header("Location: /admin/src/page/post/view.php");
+header("Location: /admin/page/post/view.php");

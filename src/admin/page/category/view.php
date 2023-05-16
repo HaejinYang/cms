@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/category.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
 
 class CategoryViewer
 {

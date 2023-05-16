@@ -3,14 +3,14 @@
     <div class="well">
         <h4>Blog Search</h4>
         <form action="search.php" method="post">
-        <div class="input-group">
-            <input name="search" type="text" class="form-control">
-            <span class="input-group-btn">
+            <div class="input-group">
+                <input name="search" type="text" class="form-control">
+                <span class="input-group-btn">
                 <button name="submit" class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                 </button>
             </span>
-        </div>
+            </div>
         </form> <!-- search form -->
         <!-- /.input-group -->
     </div>
@@ -22,16 +22,10 @@
             <div class="col-lg-12">
                 <ul class="list-unstyled">
                     <?php
-                    require_once $_SERVER['DOCUMENT_ROOT'].'/db/db.php';
-                    $result = DB::query("SELECT * FROM category LIMIT 3");
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/category/view.php';
 
-                    $el = '';
-                    while($row = $result->fetch_assoc()) {
-                        $li = "<li><a href=\"#\">{$row['title']}</a></li>";
-                        $el .= $li;
-                    }
+                    echo CategoryViewer::viewInList(3);
 
-                    echo $el;
                     ?>
                 </ul>
             </div>
@@ -42,7 +36,8 @@
     <!-- Side Widget Well -->
     <div class="well">
         <h4>Side Widget Well</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
+            laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
     </div>
 
 </div>

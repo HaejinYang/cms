@@ -1,4 +1,6 @@
 <?php
+
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 
 /*
@@ -36,6 +38,11 @@ class Category extends DB
     public static function readAll()
     {
         return self::query("SELECT * FROM category");
+    }
+
+    public static function readLimit(int $limit)
+    {
+        return self::query("SELECT * FROM category LIMIT {$limit}");
     }
 
     public static function update(int $id, string $title): bool

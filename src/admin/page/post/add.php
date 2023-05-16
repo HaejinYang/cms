@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/model/post.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
 if (isset($_POST['create'])) {
     $post = new Post();
@@ -11,12 +12,12 @@ if (isset($_POST['create'])) {
 ?>
 
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/navigation.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/navigation.php' ?>
 
     <div id="page-wrapper">
 
@@ -39,7 +40,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
                                 <label for="category_id">카테고리</label>
                             </div>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/page/category/view.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/view.php';
                             echo CategoryViewer::viewInSelect(-1);
                             ?>
                         </div>
@@ -84,4 +85,4 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/header.php' ?>
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/src/footer.php' ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/footer.php' ?>

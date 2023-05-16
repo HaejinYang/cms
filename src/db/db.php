@@ -1,4 +1,5 @@
 <?php
+
 class DB
 {
     private static $instance = null;
@@ -6,7 +7,7 @@ class DB
     private static function instance()
     {
         if (self::$instance === null) {
-            $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/.env');
+            $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/.env');
             self::$instance = new mysqli($env['DB_HOST'], $env['DB_USER_ID'], $env['DB_USER_PASSWORD'], $env['DB_NAME'], $env['DB_PORT']);
             if (self::$instance->connect_errno) {
                 throw new Exception('dberror: ' . self::$instance->connect_errno);

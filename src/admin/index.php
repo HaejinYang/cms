@@ -1,9 +1,9 @@
-<?php require_once __DIR__ . '/src/header.php' ?>
+<?php require_once __DIR__ . '/layout/header.php' ?>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php require_once __DIR__ . '/src/navigation.php' ?>
+    <?php require_once __DIR__ . '/layout/navigation.php' ?>
 
     <div id="page-wrapper">
 
@@ -14,16 +14,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         Welcome to admin
-                        <small>Subheading</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="/admin/index.php">Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-file"></i> Blank Page
-                        </li>
-                    </ol>
                 </div>
             </div>
             <!-- /.row -->
@@ -34,4 +25,4 @@
     </div>
     <!-- /#page-wrapper -->
 
-    <?php require_once __DIR__ . '/src/footer.php' ?>
+    <?php require_once __DIR__ . '/layout/footer.php' ?>

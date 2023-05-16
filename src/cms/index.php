@@ -1,8 +1,8 @@
 <!-- header -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/header.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/header.php'; ?>
 
 <!-- Navigation -->
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/navigation.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/navigation.php'; ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -15,6 +15,12 @@
                 Page Heading
                 <small>Secondary Text</small>
             </h1>
+
+            <!-- First Blog Post -->
+            <?php
+            $post_list = require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/post/list.php';
+            echo $post_list;
+            ?>
 
             <!-- Pager -->
             <ul class="pager">
@@ -29,9 +35,9 @@
         </div>
 
         <!-- Blog Sidebar Widgets Column -->
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/sidebar.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/sidebar.php' ?>
     </div>
     <!-- /.row -->
     <hr>
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/footer.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/layout/footer.php'; ?>
