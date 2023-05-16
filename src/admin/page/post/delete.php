@@ -5,7 +5,7 @@ do {
         break;
     }
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/index.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
     $post = new Post();
     $post->delete($_GET['id']);

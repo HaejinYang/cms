@@ -34,7 +34,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </thead>
                         <tbody>
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/index.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
                         $post = new Post();
                         $post->readAll();

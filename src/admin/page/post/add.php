@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/index.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
 if (isset($_POST['create'])) {
     $post = new Post();

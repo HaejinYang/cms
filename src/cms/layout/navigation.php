@@ -15,17 +15,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <?php
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/category/view.php';
 
-                require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
-                $result = DB::query("SELECT * FROM category");
+                echo CategoryViewer::viewInList(5);
 
-                $el = '';
-                while ($row = $result->fetch_assoc()) {
-                    $html = "<li><a href=\"#\">{$row['title']}</a></li>";
-                    $el .= $html;
-                }
-
-                echo $el;
                 ?>
                 <li><a href="/admin">Admin</a></li>
             </ul>
