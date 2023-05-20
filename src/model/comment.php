@@ -3,9 +3,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
 
 class Comment extends DB
 {
-    public function create()
+    public function create(int $post_id, string $author, string $email, string $content, string $status, string $date): bool
     {
+        $query = "INSERT INTO comment(post_id, author, email, content, status, date) VALUES(?, ?, ?, ?, ?, ?)";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("isssss", $post_id, $author, $email, $content, $status, $date);
 
+        return $stmt->execute();
     }
 
     public function read(int $id)
@@ -15,6 +19,16 @@ class Comment extends DB
         $stmt->bind_param("i", $id);
         $result = $stmt->execute();
         return $result->fetch_assoc();
+    }
+
+    public function readByPostId(int $id)
+    {
+        $query = "SELECT * FROM comment WHERE post_id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function readAll()

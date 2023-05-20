@@ -21,7 +21,7 @@ while ($row = $result->next()) {
     $content = substr($row['content'], 0, 10) . "...";
     $html = <<<EOT
                 <h2>
-                <a href="/cms/page/post/index.php?post_id={$row['id']}">{$row['title']}</a>
+                <a href="/cms/page/post/index.php?id={$row['id']}">{$row['title']}</a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php">{$row['author']}</a>

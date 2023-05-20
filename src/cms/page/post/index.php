@@ -14,8 +14,11 @@
             <!-- Blog Post -->
             <?php
             require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
-            if (isset($_GET['post_id'])) {
-                $id = $_GET['post_id'];
+
+            // 게시글 Id를 기준으로 보여줌.
+            $post_id = null;
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
                 $post = new Post();
                 $row = $post->read($id);
                 $content = $row['content'];
@@ -42,43 +45,24 @@ EOT;
                 echo $html;
             }
             ?>
-
-            <?php
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
-            if (isset($_GET['category_id'])) {
-                $id = $_GET['category_id'];
-                $post = new Post();
-                $post->readByCategoryId($id);
-                $el = "";
-                while ($row = $post->next()) {
-                    $html = <<<EOT
-                        <h1>{$row['title']}</h1>
-                        <p class="lead">
-                            by {$row['author']}
-                        </p>
-                        
-                        <hr>
-                        
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on {$row['date']}</p>
-                        
-                        <hr>
-                        
-                        <img class="img-responsive" src="/{$row['image']}" alt="">
-                        
-                        <hr>
-                        
-                        <p>{$content}</p>
-            
-                        <hr>
-EOT;
-                }
-
-                echo $html;
-            }
-            ?>
             <!-- Posted Comments -->
 
+            <!-- Comments Form -->
+            <?php
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/comment/view.php';
+
+            $commentViewer = new CommentViewer();
+            echo $commentViewer->submitFormInPost($_GET['id']);
+            ?>
+
             <!-- Comment -->
+            <?php
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/comment/view.php';
+
+            $commentViewer = new CommentViewer();
+            echo $commentViewer->allCommentsInPost($_GET['id']);
+
+            ?>
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object" src="http://placehold.it/64x64" alt="">
