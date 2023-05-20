@@ -30,11 +30,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     {
         $stmt = self::prepare("SELECT * FROM post WHERE id = ?");
         $stmt->bind_param("i", $id);
-        $isSuccess = $stmt->execute();
-        if (!$isSuccess) {
-            return false;
-        }
-
+        $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_assoc();
