@@ -117,4 +117,19 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    /*
+     * 모든 게시글이 가질 수 있는 공개 상태를 반환한다.
+     */
+    public static function getStatus(): array
+    {
+        $status = ["draft" => "보류", "publish" => "공개"];
+
+        return $status;
+    }
+
+    public static function isPublished($status): bool
+    {
+        return $status === "publish";
+    }
 }

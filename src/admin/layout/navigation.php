@@ -44,7 +44,7 @@
                     게시글 <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                     <li>
-                        <a href="/admin/page/post/view.php"> 모든 게시글 보기</a>
+                        <a href="/admin/page/post/index.php"> 모든 게시글 보기</a>
                     </li>
                     <li>
                         <a href="/admin/page/post/add.php"> 게시글 추가</a>

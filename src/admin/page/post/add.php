@@ -51,8 +51,22 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
 
                         <div class="form-group">
-                            <label for="status">상태</label>
-                            <input type="text" class="form-control" name="status">
+                            <div>
+                                <label for="status">상태</label>
+                            </div>
+                            <select name="status">
+                                <?php
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+
+                                $status_arr = Post::getStatus();
+                                $el = "";
+                                foreach ($status_arr as $key => $value) {
+                                    $html = "<option value='{$key}'>{$value}</option>";
+                                    $el .= $html;
+                                }
+                                echo $el;
+                                ?>
+                            </select>
                         </div>
 
                         <div class="form-group">

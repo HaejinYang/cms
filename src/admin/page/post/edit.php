@@ -17,13 +17,13 @@ if (isset($_POST['edit'])) {
             $_POST['content'], date('y-m-d'), $_POST['comment_count']);
     }
 
-    header("Location: /admin/page/post/view.php");
+    header("Location: /admin/page/post/index.php");
 
     return;
 }
 
 if (!isset($_GET['id'])) {
-    header("Location: /admin/page/post/view.php");
+    header("Location: /admin/page/post/index.php");
 
     return;
 }
@@ -78,8 +78,27 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
 
                         <div class="form-group">
-                            <label for="status">상태</label>
-                            <input type="text" class="form-control" name="status" value="<?php echo $row['status'] ?>">
+                            <div>
+                                <label for="status">상태</label>
+                            </div>
+                            <select name="status">
+                                <?php
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+                                $status = $row['status'];
+                                $status_arr = Post::getStatus();
+                                $options = ["draft" => "<option value='draft' ", "publish" => "<option value='publish'"];
+                                $html = "";
+                                foreach ($options as $key => $el) {
+                                    if ($key === $status) {
+                                        $el .= " selected>{$status_arr[$key]}</option>";
+                                    } else {
+                                        $el .= ">{$status_arr[$key]}</option>";
+                                    }
+                                    $html .= $el;
+                                }
+                                echo $html;
+                                ?>
+                            </select>
                         </div>
 
                         <div class="form-group">
