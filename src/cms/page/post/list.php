@@ -14,10 +14,14 @@ $postCount = 0;
 const MAX_POST_COUNT = 3;
 $el = "";
 while ($row = $result->next()) {
-    $postCount++;
-    if ($postCount > MAX_POST_COUNT) {
+    if ($postCount >= MAX_POST_COUNT) {
         break;
     }
+    $status = $row['status'];
+    if (!Post::isPublished($status)) {
+        continue;
+    }
+
     $content = substr($row['content'], 0, 10) . "...";
     $html = <<<EOT
                 <h2>
@@ -36,6 +40,8 @@ while ($row = $result->next()) {
                 <hr>
 EOT;
     $el .= $html;
+
+    $postCount++;
 }
 
 return $el;

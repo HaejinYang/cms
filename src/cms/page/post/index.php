@@ -14,13 +14,25 @@
             <!-- Blog Post -->
             <?php
             require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/comment/view.php';
+
 
             // 게시글 Id를 기준으로 보여줌.
             $post_id = null;
-            if (isset($_GET['id'])) {
+            $is_published = true;
+            do {
+                if (!isset($_GET['id'])) {
+                    break;
+                }
+
                 $id = $_GET['id'];
                 $post = new Post();
                 $row = $post->read($id);
+                if (!Post::isPublished($row['status'])) {
+                    $is_published = false;
+                    break;
+                }
+
                 $content = $row['content'];
                 $html = <<<EOT
                         <h1>{$row['title']}</h1>
@@ -43,26 +55,21 @@
                         <hr>
 EOT;
                 echo $html;
+
+                //Posted Comments
+                //Comments Form and Comments
+
+                $commentViewer = new CommentViewer();
+                echo $commentViewer->submitFormInPost($_GET['id']);
+                echo $commentViewer->allCommentsInPost($_GET['id']);
+
+            } while (false);
+
+            if (!$is_published) {
+                echo "<h1> 게시글이 존재 하지 않습니다.</h1>";
             }
             ?>
-            <!-- Posted Comments -->
 
-            <!-- Comments Form -->
-            <?php
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/comment/view.php';
-
-            $commentViewer = new CommentViewer();
-            echo $commentViewer->submitFormInPost($_GET['id']);
-            ?>
-
-            <!-- Comment -->
-            <?php
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/comment/view.php';
-
-            $commentViewer = new CommentViewer();
-            echo $commentViewer->allCommentsInPost($_GET['id']);
-
-            ?>
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object" src="http://placehold.it/64x64" alt="">
