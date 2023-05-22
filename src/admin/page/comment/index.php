@@ -15,8 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to admin
-                        <small>Subheading</small>
+                        댓글
                     </h1>
                     <table class="table table-hover">
                         <thead>

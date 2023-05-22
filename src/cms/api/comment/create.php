@@ -1,9 +1,7 @@
 <?php
-//namespace Cms\Api\Comment\Create;
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
 
-global $_POST;
 $post_id = null;
 do {
     if (!isset($_POST['create'])) {
@@ -16,8 +14,12 @@ do {
     $date = date('y-m-d');
     $post_id = $_POST['post_id'];
     $status = 'draft';
-    $comment = new Comment();
-    $comment->create($post_id, $author, $email, $content, $status, $date);
+    $commentDao = new Comment();
+    $commentDao->create($post_id, $author, $email, $content, $status, $date);
+
+    $postDao = new Post();
+    $postDao->updateCommentCount($post_id);
+
 } while (false);
 
 header("Location: /cms/page/post/index.php?id={$post_id}");

@@ -102,6 +102,14 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result;
     }
 
+    public function updateCommentCount(int $id)
+    {
+        $query = "UPDATE post SET comment_count = comment_count + 1 WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    }
+
     public function delete(int $id)
     {
         $query = "DELETE FROM post WHERE id = ?";
