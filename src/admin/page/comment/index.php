@@ -52,11 +52,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td>{$row['content']}</td>
                                         <td>{$row['email']}</td>
                                         <td>{$row['status']}</td>
-                                        <td>{$post_row['title']}</td>
+                                        <td><a href='/cms/page/post/index.php?id={$post_id}'>{$post_row['title']}</a></td>
                                         <td>{$row['date']}</td>
-                                        <td><a href=''>승인</a></td>
-                                        <td><a href=''>거부</a></td>
-                                        <td><a href=''>수정</a></td>
+                                        <td><a href='/admin/api/comment/approve.php?id={$row['id']}'>승인</a></td>
+                                        <td><a href='/admin/api/comment/unapprove.php?id={$row['id']}'>거부</a></td>
+                                        <td><a href='/admin/api/comment/edit.php?id={$row['id']}'>수정</a></td>
                                         <td><a href='/admin/api/comment/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                             $el .= $html;

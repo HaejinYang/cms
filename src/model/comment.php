@@ -39,9 +39,15 @@ class Comment extends DB
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function update(int $id)
+    /*
+     * status: approve, unapprove
+     */
+    public function updateStatus(int $id, string $status)
     {
-
+        $query = "UPDATE comment SET status = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("si", $status, $id);
+        $stmt->execute();
     }
 
     public function delete(int $id)
