@@ -29,4 +29,14 @@ class User extends DB
     {
 
     }
+
+    /*
+     * 유저 역할(admin ...)등을 모두 반환한다.
+     */
+    public static function getAllRole(): array
+    {
+        $role = ["admin" => "관리자", "subscriber" => "구독자"];
+
+        return $role;
+    }
 }
