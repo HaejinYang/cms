@@ -16,10 +16,20 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                     <h1 class="page-header">
                         유저 추가
                     </h1>
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="/admin/api/user/create.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">닉네임</label>
                             <input type="text" class="form-control" name="nickname">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">비밀번호</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">비밀번호확인</label>
+                            <input type="password" class="form-control" name="password_check">
                         </div>
 
                         <div class="form-group">
@@ -47,7 +57,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                 $roles = User::getAllRole();
                                 $el = "";
                                 foreach ($roles as $key => $value) {
-                                    $html = "<option value='{$key}]'>{$value}</option>";
+                                    $html = "<option value='{$key}'>{$value}</option>";
                                     $el .= $html;
                                 }
                                 echo $el;
@@ -56,7 +66,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
 
                         <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="create" value="저장">
+                            <input class="btn btn-primary" type="submit" name="create" value="추가">
                         </div>
                     </form>
                 </div>
