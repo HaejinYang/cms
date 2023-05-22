@@ -9,8 +9,8 @@ do {
     $id = $_GET['id'];
     $status = "unapprove";
 
-    $commentDao = new Comment();
-    $commentDao->updateStatus($id, $status);
+    $comment_dao = new Comment();
+    $comment_dao->updateStatus($id, $status);
 } while (false);
 
 header("Location: /admin/page/comment/index.php");

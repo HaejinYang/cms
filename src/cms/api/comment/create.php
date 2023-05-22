@@ -14,11 +14,11 @@ do {
     $date = date('y-m-d');
     $post_id = $_POST['post_id'];
     $status = 'draft';
-    $commentDao = new Comment();
-    $commentDao->create($post_id, $author, $email, $content, $status, $date);
+    $comment_dao = new Comment();
+    $comment_dao->create($post_id, $author, $email, $content, $status, $date);
 
-    $postDao = new Post();
-    $postDao->updateCommentCount($post_id);
+    $post_dao = new Post();
+    $post_dao->updateCommentCount($post_id);
 
 } while (false);
 
