@@ -14,8 +14,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to admin
-                        <small>Subheading</small>
+                        카테고리
                     </h1>
                     <div class="col-xs-6">
                         <?php

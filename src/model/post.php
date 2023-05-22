@@ -30,11 +30,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     {
         $stmt = self::prepare("SELECT * FROM post WHERE id = ?");
         $stmt->bind_param("i", $id);
-        $isSuccess = $stmt->execute();
-        if (!$isSuccess) {
-            return false;
-        }
-
+        $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_assoc();
@@ -104,6 +100,14 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         move_uploaded_file($image_temp_path, $_SERVER['DOCUMENT_ROOT'] . '/images/' . $image);
 
         return $result;
+    }
+
+    public function updateCommentCount(int $id)
+    {
+        $query = "UPDATE post SET comment_count = comment_count + 1 WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
     }
 
     public function delete(int $id)

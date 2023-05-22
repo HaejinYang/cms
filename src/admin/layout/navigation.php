@@ -55,7 +55,7 @@
                 <a href="/admin/page/category/index.php"><i class="fa fa-fw fa-wrench"></i> 카테고리</a>
             </li>
             <li>
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> 댓글</a>
+                <a href="/admin/page/comment/index.php"><i class="fa fa-fw fa-file"></i> 댓글</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
