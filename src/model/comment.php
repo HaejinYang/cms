@@ -23,7 +23,7 @@ class Comment extends DB
 
     public function readByPostId(int $id)
     {
-        $query = "SELECT * FROM comment WHERE post_id = ?";
+        $query = "SELECT * FROM comment WHERE post_id = ? ORDER BY date DESC";
         $stmt = self::prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();

@@ -16,6 +16,10 @@ class CommentViewer
             $rows = $this->dao->readByPostId($post_id);
             $el = "";
             foreach ($rows as $row) {
+                if ($row['status'] !== 'approve') {
+                    continue;
+                }
+
                 $html = <<<EOT
                     <!-- Comment -->
                     <div class="media">
