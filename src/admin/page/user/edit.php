@@ -20,13 +20,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/view/UserViewer.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
                     $response_msg = "";
-
+                    $is_success = false;
                     do {
+                        if (!isset($_GET['id'])) {
+                            $response_msg = "잘못된 요청입니다.";
+
+                            break;
+                        }
+
                         try {
                             $user_dao = new User();
                             $user = null;
-                            $result = $user_dao->read($user, 1);
+                            $id = $_GET['id'];
+                            $result = $user_dao->read($user, $id);
                             if ($result !== User::ERROR_OK) {
                                 $response_msg = User::getErrorCodeToMsg($result);
 
@@ -35,7 +43,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
                             $select_role = UserViewer::selectWithOptions($user['role']);
                             $el = <<<EOT
-                    <form action="/admin/api/user/update.php" method="post" enctype="multipart/form-data">
+                    <form action="/admin/api/user/edit.php?" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Id</label>
+                            <input type="text" class="form-control" name="id" value="{$user['id']}" readonly>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="title">닉네임</label>
                             <input type="text" class="form-control" name="nickname" value="{$user['nickname']}">
@@ -74,15 +87,20 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
 
                         <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="create" value="추가">
+                            <input class="btn btn-primary" type="submit" name="edit" value="추가">
                         </div>
                     </form>
 EOT;
+                            $is_success = true;
                             echo $el;
                         } catch (mysqli_sql_exception $e) {
                             $response_msg = $e->getMessage();
                         }
                     } while (false);
+
+                    if (!$is_success) {
+                        echo goBackWithResponse($response_msg);
+                    }
                     ?>
                 </div>
             </div>

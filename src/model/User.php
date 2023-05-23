@@ -57,9 +57,26 @@ class User extends DB
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function update()
+    public function update(int $id, string $nickname, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
+        if ($this->isInvalidPassword($password, $password_check)) {
+            return self::ERROR_PASSWORD;
+        }
 
+        if ($this->isDuplicateEmail($email)) {
+            return self::ERROR_EMAIL;
+        }
+
+        if ($this->isDuplicateNickname($nickname)) {
+            return self::ERROR_NICKNAME;
+        }
+
+        $query = "UPDATE user SET nickname = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("ssssssi", $nickname, $password, $lastname, $firstname, $email, $role, $id);
+        $stmt->execute();
+
+        return self::ERROR_OK;
     }
 
     public function updateRole(int $id, string $role): int
