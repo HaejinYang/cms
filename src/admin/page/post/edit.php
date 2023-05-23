@@ -67,7 +67,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                 <label for="category_id">카테고리</label>
                             </div>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/view.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/view/CategoryViewer.php';
                             echo CategoryViewer::viewInSelect($row['category_id']);
                             ?>
                         </div>
