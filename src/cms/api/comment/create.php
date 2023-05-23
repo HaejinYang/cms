@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Comment.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
 
 $post_id = null;
