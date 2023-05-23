@@ -8,6 +8,7 @@ class User extends DB
     const ERROR_EMAIL = 2;
     const ERROR_NICKNAME = 3;
     const ERROR_ID = 4;
+    const ERROR_ROLE = 5;
 
     public function create(string $nickname, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
@@ -46,6 +47,24 @@ class User extends DB
     public function update()
     {
 
+    }
+
+    public function updateRole(int $id, string $role): int
+    {
+        if (!is_numeric($id)) {
+            return self::ERROR_ID;
+        }
+
+        if ($this->isInvalidRole($role)) {
+            return self::ERROR_ROLE;
+        }
+
+        $query = "UPDATE user SET role = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("si", $role, $id);
+        $stmt->execute();
+
+        return self::ERROR_OK;
     }
 
     public function delete(int $id): int
@@ -91,6 +110,9 @@ class User extends DB
             case self::ERROR_ID:
                 $msg = "ID를 확인해주세요.";
                 break;
+            case self::ERROR_ROLE:
+                $msg = "역할을 확인해주세요.";
+                break;
             default:
                 $msg = "정의되지 않은 에러입니다.";
                 break;
@@ -124,5 +146,12 @@ class User extends DB
     private function isInvalidPassword(string $password, string $password_check): bool
     {
         return empty($password) || empty($password_check) || $password !== $password_check;
+    }
+
+    private function isInvalidRole(string $role): bool
+    {
+        $list = ["admin" => 1, "subscriber" => 1];
+
+        return !isset($list[$role]);
     }
 }
