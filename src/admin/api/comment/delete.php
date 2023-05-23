@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Comment.php';
 
 do {
     if (!isset($_GET['id'])) {

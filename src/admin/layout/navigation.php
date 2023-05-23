@@ -58,14 +58,15 @@
                 <a href="/admin/page/comment/index.php"><i class="fa fa-fw fa-file"></i> 댓글</a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
+                <a href="javascript:;" data-toggle="collapse" data-target="#user_dropdown"><i
+                        class="fa fa-fw fa-arrows-v"></i>
                     유저 <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
+                <ul id="user_dropdown" class="collapse">
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="/admin/page/user/index.php">모든 유저 보기</a>
                     </li>
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="/admin/page/user/add.php">유저 추가</a>
                     </li>
                 </ul>
             </li>

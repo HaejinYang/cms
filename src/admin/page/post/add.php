@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
 
 if (isset($_POST['create'])) {
     $post = new Post();
@@ -40,7 +40,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                 <label for="category_id">카테고리</label>
                             </div>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/view.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/view/CategoryViewer.php';
                             echo CategoryViewer::viewInSelect(-1);
                             ?>
                         </div>
@@ -56,7 +56,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             </div>
                             <select name="status">
                                 <?php
-                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
 
                                 $status_arr = Post::getStatus();
                                 $el = "";

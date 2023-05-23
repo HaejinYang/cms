@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Comment.php';
 
 do {
     if (!isset($_GET['id'])) {
@@ -9,8 +9,8 @@ do {
     $id = $_GET['id'];
     $status = "approve";
 
-    $commentDao = new Comment();
-    $commentDao->updateStatus($id, $status);
+    $comment_dao = new Comment();
+    $comment_dao->updateStatus($id, $status);
 } while (false);
 
 header("Location: /admin/page/comment/index.php");

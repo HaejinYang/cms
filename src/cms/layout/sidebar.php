@@ -22,7 +22,7 @@
             <div class="col-lg-12">
                 <ul class="list-unstyled">
                     <?php
-                    require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/category/view.php';
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/view/CategoryViewer.php';
 
                     echo CategoryViewer::viewInList(3);
 

@@ -1,7 +1,7 @@
 <?php
 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 /*
  * psr: class name PascalNaming, method camelCase, constant CONSTANT_NAME,
