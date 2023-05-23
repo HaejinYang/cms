@@ -2,30 +2,30 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/user.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
 $response_msg = "";
-$isSuccess = false;
+$is_success = false;
 do {
-    if (!isset($_POST['create'])) {
-        $response_msg = "잘못된 호출입니다.";
+    if (!isset($_GET['id'])) {
+        $response_msg = "잘못된 요청입니다.";
 
         break;
     }
-
+    $id = $_GET['id'];
     try {
         $user_dao = new User();
-        $result = $user_dao->create($_POST['nickname'], $_POST['password'], $_POST['password_check'], $_POST['lastname'], $_POST['firstname'], $_POST['email'], $_POST['role']);
+        $result = $user_dao->delete($id);
         if ($result !== User::ERROR_OK) {
             $response_msg = User::getErrorCodeToMsg($result);
 
             break;
         }
 
-        $isSuccess = true;
+        $is_success = true;
     } catch (mysqli_sql_exception $e) {
-        $response_msg = "입력값을 다시 확인해주세요.";
+        $response_msg = $e->getMessage();
     }
 } while (false);
 
-if ($isSuccess) {
+if ($is_success) {
     header("Location: /admin/page/user/index.php");
 } else {
     echo goBackWithResponse($response_msg);

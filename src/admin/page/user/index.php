@@ -49,7 +49,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td>{$row['date']}</td>
                                         <td><a href='#'>승인</a></td>
                                         <td><a href='#'>거부</a></td>
-                                        <td><a href='#'>삭제</a></td>
+                                        <td><a href='/admin/api/user/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                                 $el .= $html;
                             }

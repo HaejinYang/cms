@@ -7,8 +7,9 @@ class User extends DB
     const ERROR_PASSWORD = 1;
     const ERROR_EMAIL = 2;
     const ERROR_NICKNAME = 3;
+    const ERROR_ID = 4;
 
-    public function create(string $nickname, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role)
+    public function create(string $nickname, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
             return self::ERROR_PASSWORD;
@@ -47,9 +48,18 @@ class User extends DB
 
     }
 
-    public function delete()
+    public function delete(int $id): int
     {
+        if (!is_numeric($id)) {
+            return self::ERROR_ID;
+        }
 
+        $query = "DELETE FROM user WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        return self::ERROR_OK;
     }
 
     /*
@@ -77,6 +87,9 @@ class User extends DB
                 break;
             case self::ERROR_NICKNAME:
                 $msg = "닉네임 중복을 확인해주세요.";
+                break;
+            case self::ERROR_ID:
+                $msg = "ID를 확인해주세요.";
                 break;
             default:
                 $msg = "정의되지 않은 에러입니다.";
