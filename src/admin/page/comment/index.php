@@ -33,7 +33,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         <tbody>
                         <?php
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/model/comment.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
                         $comment = new Comment();
                         $rows = $comment->readAll();
                         $el = "";

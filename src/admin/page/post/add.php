@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
 
 if (isset($_POST['create'])) {
     $post = new Post();
@@ -56,7 +56,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             </div>
                             <select name="status">
                                 <?php
-                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
 
                                 $status_arr = Post::getStatus();
                                 $el = "";

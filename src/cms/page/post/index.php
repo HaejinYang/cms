@@ -13,7 +13,7 @@
         <div class="col-md-8">
             <!-- Blog Post -->
             <?php
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/post.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
             require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/comment/view.php';
 
 
