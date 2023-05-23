@@ -32,9 +32,22 @@ class User extends DB
         return self::ERROR_OK;
     }
 
-    public function read()
+    public function read(&$user, int $id): int
     {
+        if (!is_numeric($id)) {
+            return self::ERROR_ID;
+        }
 
+        $query = "SELECT * FROM user WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+        if ($user === null) {
+            return self::ERROR_ID;
+        }
+
+        return self::ERROR_OK;
     }
 
     public function readAll(): array
@@ -150,8 +163,15 @@ class User extends DB
 
     private function isInvalidRole(string $role): bool
     {
-        $list = ["admin" => 1, "subscriber" => 1];
+        $list = $this->getRoles();
 
         return !isset($list[$role]);
+    }
+
+    public static function getRoles(): array
+    {
+        $list = ["admin" => "관리자", "subscriber" => "구독자"];
+
+        return $list;
     }
 }

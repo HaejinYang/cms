@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/user.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
 $response_msg = "";
 $isSuccess = false;
