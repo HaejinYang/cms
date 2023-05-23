@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/db/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 class Post extends DB
 {
