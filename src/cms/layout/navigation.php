@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <?php
-                require_once $_SERVER['DOCUMENT_ROOT'] . '/cms/page/category/view.php';
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/view/CategoryViewer.php';
 
                 echo CategoryViewer::viewInList(5);
 
