@@ -18,7 +18,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                     </h1>
                     <div class="col-xs-6">
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
 
                         if (isset($_POST['add'])) {
                             $title = $_POST['title'];
@@ -42,7 +42,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                         <?php
                         // update category
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/update.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
 
                         // edit cateogry
                         if (isset($_GET['edit'])) {
@@ -78,13 +78,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                             </thead>
                             <tbody>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
 
                             // delete category
                             if (isset($_GET['delete'])) {
                                 $id = $_GET['delete'];
                                 Category::delete($id);
-                                header("Location: category.php");
+                                header("Location: index.php");
                             }
 
                             // find all category

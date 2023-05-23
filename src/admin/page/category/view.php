@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/category.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
 
 class CategoryViewer
 {
