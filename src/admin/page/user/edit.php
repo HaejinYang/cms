@@ -50,8 +50,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
                         
                         <div class="form-group">
-                            <label for="title">닉네임</label>
-                            <input type="text" class="form-control" name="nickname" value="{$user['nickname']}">
+                            <label for="title">계정</label>
+                            <input type="text" class="form-control" name="account" value="{$user['account']}">
                         </div>
 
                         <div class="form-group">

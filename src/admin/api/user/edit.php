@@ -12,7 +12,7 @@ do {
     }
 
     $user_dao = new UserStore();
-    $result = $user_dao->update($_POST['id'], $_POST['nickname'], $_POST['password'], $_POST['password_check'], $_POST['lastname'],
+    $result = $user_dao->update($_POST['id'], $_POST['account'], $_POST['password'], $_POST['password_check'], $_POST['lastname'],
         $_POST['firstname'], $_POST['email'], $_POST['role']);
     if ($result !== UserStore::ERROR_OK) {
         $response_msg = UserStore::getErrorCodeToMsg($result);
