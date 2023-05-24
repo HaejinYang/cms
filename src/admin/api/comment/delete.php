@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CommentStore.php';
 
 do {
     if (!isset($_GET['id'])) {
@@ -8,7 +8,7 @@ do {
 
     $comment_id = $_GET['id'];
     try {
-        $comment = new Comment();
+        $comment = new CommentStore();
         $comment->delete($comment_id);
     } catch (mysqli_sql_exception $e) {
         echo $e->getMessage();

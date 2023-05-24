@@ -1,11 +1,11 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
 
 class UserViewer
 {
     public static function selectWithOptions($selected)
     {
-        $roles = User::getRoles();
+        $roles = UserStore::getRoles();
 
         $el = "<select name='role'>";
         foreach ($roles as $role => $value) {

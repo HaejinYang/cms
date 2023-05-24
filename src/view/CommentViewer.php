@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Comment.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CommentStore.php';
 
 class CommentViewer
 {
@@ -7,7 +7,7 @@ class CommentViewer
 
     public function __construct()
     {
-        $this->dao = new Comment();
+        $this->dao = new CommentStore();
     }
 
     public function allCommentsInPost(int $post_id)
@@ -21,7 +21,7 @@ class CommentViewer
                 }
 
                 $html = <<<EOT
-                    <!-- Comment -->
+                    <!-- CommentStore -->
                     <div class="media">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">

@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
-class Comment extends DB
+class CommentStore extends DB
 {
     public function create(int $post_id, string $author, string $email, string $content, string $status, string $date): bool
     {

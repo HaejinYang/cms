@@ -32,13 +32,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </thead>
                         <tbody>
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Comment.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
-                        $comment = new Comment();
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CommentStore.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
+                        $comment = new CommentStore();
                         $rows = $comment->readAll();
                         $el = "";
 
-                        $post = new Post();
+                        $post = new PostStore();
 
                         foreach ($rows as $row) {
                             $post_id = $row['post_id'];

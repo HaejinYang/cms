@@ -17,7 +17,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         유저 수정
                     </h1>
                     <?php
-                    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/view/UserViewer.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
@@ -31,12 +31,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         }
 
                         try {
-                            $user_dao = new User();
+                            $user_dao = new UserStore();
                             $user = null;
                             $id = $_GET['id'];
                             $result = $user_dao->read($user, $id);
-                            if ($result !== User::ERROR_OK) {
-                                $response_msg = User::getErrorCodeToMsg($result);
+                            if ($result !== UserStore::ERROR_OK) {
+                                $response_msg = UserStore::getErrorCodeToMsg($result);
 
                                 break;
                             }
