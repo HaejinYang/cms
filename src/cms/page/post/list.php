@@ -2,18 +2,18 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
 
 $post = new PostStore();
-$result = null;
+$rows = null;
 if (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];
-    $result = $post->readByCategoryId($category_id);
+    $rows = $post->readByCategoryId($category_id);
 } else {
-    $result = $post->readAll();
+    $rows = $post->readAll();
 }
 
 $postCount = 0;
 const MAX_POST_COUNT = 3;
 $el = "";
-while ($row = $result->next()) {
+foreach ($rows as $row) {
     if ($postCount >= MAX_POST_COUNT) {
         break;
     }

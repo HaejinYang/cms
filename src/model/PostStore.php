@@ -4,13 +4,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 class PostStore extends DB
 {
-    private $result;
-
-    function __constructor()
-    {
-        $this->result = null;
-    }
-
     public function create(string $title, int $category_id, string $author, string $status, string $tags,
                            string $content, string $image, string $image_temp_path, string $date, string $comment_count): bool
     {
@@ -36,42 +29,22 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result->fetch_assoc();
     }
 
-    public function readByCategoryId(int $id): PostStore
+    public function readByCategoryId(int $id): array|null
     {
         $stmt = self::prepare("SELECT * FROM post WHERE category_id = ?");
         $stmt->bind_param("i", $id);
-        $isSuccess = $stmt->execute();
-        if (!$isSuccess) {
-            return false;
-        }
+        $stmt->execute();
 
-        $this->result = $stmt->get_result();
-
-        return $this;
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readAll(): PostStore
+    public function readAll(): array
     {
-        $this->result = self::query("SELECT * FROM post");
+        $result = self::query("SELECT * FROM post");
 
-        return $this;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function next(): bool|array
-    {
-        if (!$this->result) {
-            return false;
-        }
-
-        $row = $this->result->fetch_assoc();
-        if (!$row) {
-            $this->result = null;
-
-            return false;
-        }
-
-        return $row;
-    }
 
     /*
      * 이미지가 변경되지 않았다면, $image_temp_path에 빈문자열 대입
