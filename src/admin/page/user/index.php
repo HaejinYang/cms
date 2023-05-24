@@ -47,10 +47,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td>{$row['email']}</td>
                                         <td>{$row['role']}</td>
                                         <td>{$row['date']}</td>
-                                        <td><a href='/admin/api/user/role.php?id={$row['id']}&role=admin'>관리자</a></td>
-                                        <td><a href='/admin/api/user/role.php?id={$row['id']}&role=subscriber'>구독자</a></td>
+                                        <td><a href='/api/user/role.php?id={$row['id']}&role=admin'>관리자</a></td>
+                                        <td><a href='/api/user/role.php?id={$row['id']}&role=subscriber'>구독자</a></td>
                                         <td><a href='/admin/page/user/edit.php?id={$row['id']}'>수정</a></td>
-                                        <td><a href='/admin/api/user/delete.php?id={$row['id']}'>삭제</a></td>
+                                        <td><a href='/api/user/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                                 $el .= $html;
                             }

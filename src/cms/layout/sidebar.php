@@ -18,7 +18,7 @@
     <!-- 로그인 -->
     <div class="well">
         <h4>로그인</h4>
-        <form action="/cms/api/auth/login.php" method="post">
+        <form action="/api/auth/login.php" method="post">
             <div class="form-group">
                 <input name="account" type="text" class="form-control" placeholder="아이디">
             </div>

@@ -27,7 +27,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="/cms/api/auth/logout.php"><i class="fa fa-fw fa-power-off"></i>로그아웃</a>
+                    <a href="/api/auth/logout.php"><i class="fa fa-fw fa-power-off"></i>로그아웃</a>
                 </li>
             </ul>
         </li>

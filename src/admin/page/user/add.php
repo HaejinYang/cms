@@ -16,7 +16,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                     <h1 class="page-header">
                         유저 추가
                     </h1>
-                    <form action="/admin/api/user/create.php" method="post" enctype="multipart/form-data">
+                    <form action="/api/user/create.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">계정</label>
                             <input type="text" class="form-control" name="account">
