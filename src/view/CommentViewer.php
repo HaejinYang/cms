@@ -48,7 +48,7 @@ EOT;
         $html = <<<EOT
         <div class="well">
                 <h4>댓글 남기기:</h4>
-                <form action="/cms/api/comment/create.php" method="post" role="form">
+                <form action="/api/comment/create.php" method="post" role="form">
                     <div class="form-group">
                         <label for="author">작성자</label>
                         <input type="text" name="author" class="form-control">

@@ -43,15 +43,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
                             $select_role = UserViewer::selectWithOptions($user['role']);
                             $el = <<<EOT
-                    <form action="/admin/api/user/edit.php?" method="post" enctype="multipart/form-data">
+                    <form action="/api/user/edit.php?" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Id</label>
                             <input type="text" class="form-control" name="id" value="{$user['id']}" readonly>
                         </div>
                         
                         <div class="form-group">
-                            <label for="title">닉네임</label>
-                            <input type="text" class="form-control" name="nickname" value="{$user['nickname']}">
+                            <label for="title">계정</label>
+                            <input type="text" class="form-control" name="account" value="{$user['account']}">
                         </div>
 
                         <div class="form-group">

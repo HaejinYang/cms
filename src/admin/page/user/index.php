@@ -21,7 +21,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>닉네임</th>
+                            <th>계정</th>
                             <th>성</th>
                             <th>이름</th>
                             <th>Email</th>
@@ -41,16 +41,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             foreach ($rows as $row) {
                                 $html = "<tr>
                                         <td>{$row['id']}</td>
-                                        <td>{$row['nickname']}</td>
+                                        <td>{$row['account']}</td>
                                         <td>{$row['lastname']}</td>
                                         <td>{$row['firstname']}</td>
                                         <td>{$row['email']}</td>
                                         <td>{$row['role']}</td>
                                         <td>{$row['date']}</td>
-                                        <td><a href='/admin/api/user/role.php?id={$row['id']}&role=admin'>관리자</a></td>
-                                        <td><a href='/admin/api/user/role.php?id={$row['id']}&role=subscriber'>구독자</a></td>
+                                        <td><a href='/api/user/role.php?id={$row['id']}&role=admin'>관리자</a></td>
+                                        <td><a href='/api/user/role.php?id={$row['id']}&role=subscriber'>구독자</a></td>
                                         <td><a href='/admin/page/user/edit.php?id={$row['id']}'>수정</a></td>
-                                        <td><a href='/admin/api/user/delete.php?id={$row['id']}'>삭제</a></td>
+                                        <td><a href='/api/user/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                                 $el .= $html;
                             }
