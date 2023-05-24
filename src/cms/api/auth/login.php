@@ -29,9 +29,7 @@ do {
 } while (false);
 
 if ($is_complete) {
-    echo goBackWithResponse("로그인 성공");
-
-    //header("Location: /cms/index.php");
+    header("Location: /admin/index.php");
 } else {
     echo goBackWithResponse($response_msg);
 }
