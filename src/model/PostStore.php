@@ -26,7 +26,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result;
     }
 
-    public function read(int $id): bool|array
+    public function read(int $id): array|null
     {
         $stmt = self::prepare("SELECT * FROM post WHERE id = ?");
         $stmt->bind_param("i", $id);

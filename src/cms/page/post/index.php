@@ -28,7 +28,7 @@
                 $id = $_GET['id'];
                 $post = new PostStore();
                 $row = $post->read($id);
-                if (!PostStore::isPublished($row['status'])) {
+                if ($row === null || !PostStore::isPublished($row['status'])) {
                     $is_published = false;
                     break;
                 }

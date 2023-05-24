@@ -31,6 +31,9 @@ if (!isset($_GET['id'])) {
 $id = $_GET['id'];
 $post = new PostStore();
 $row = $post->read($id);
+if ($row === null) {
+    header("Location: /admin/page/post/index.php");
+}
 ?>
 
 <?php

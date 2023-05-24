@@ -43,15 +43,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         foreach ($rows as $row) {
                             $post_id = $row['post_id'];
                             $post_row = $post->read($post_id);
+                            $post_title = "삭제됨";
+                            if ($post_row !== null) {
+                                $post_title = $post_row['title'];
+                            }
 
-                            $post_title = $post_row['title'];
                             $html = "<tr>
                                         <td>{$row['id']}</td>
                                         <td>{$row['author']}</td>
                                         <td>{$row['content']}</td>
                                         <td>{$row['email']}</td>
                                         <td>{$row['status']}</td>
-                                        <td><a href='/cms/page/post/index.php?id={$post_id}'>{$post_row['title']}</a></td>
+                                        <td><a href='/cms/page/post/index.php?id={$post_id}'>{$post_title}</a></td>
                                         <td>{$row['date']}</td>
                                         <td><a href='/api/comment/approve.php?id={$row['id']}'>승인</a></td>
                                         <td><a href='/api/comment/unapprove.php?id={$row['id']}'>거부</a></td>
