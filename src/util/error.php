@@ -40,15 +40,12 @@ function exceptionHandler($e): void
     $trace = $e->getTraceAsString();
     $print = "[{$msg}][{$code}]:[{$file}:{$line}][trace: {$trace}]";
 
-    echo "exceptionHandelr<br>";
     echo $print;
 }
 
 function errorHandler($errno, $errstr, $errfile, $errline): bool
 {
-    echo "errorHandler<br>";
-    //throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
-    return false;
+    throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
 }
 
 set_exception_handler('util\error\exceptionHandler');
