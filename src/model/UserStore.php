@@ -6,11 +6,11 @@ class UserStore extends DB
     const ERROR_OK = 0;
     const ERROR_PASSWORD = 1;
     const ERROR_EMAIL = 2;
-    const ERROR_NICKNAME = 3;
+    const ERROR_ACCOUNT = 3;
     const ERROR_ID = 4;
     const ERROR_ROLE = 5;
 
-    public function create(string $nickname, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
+    public function create(string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
             return self::ERROR_PASSWORD;
@@ -20,13 +20,13 @@ class UserStore extends DB
             return self::ERROR_EMAIL;
         }
 
-        if ($this->isDuplicateNickname($nickname)) {
-            return self::ERROR_NICKNAME;
+        if ($this->isDuplicateAccount($account)) {
+            return self::ERROR_ACCOUNT;
         }
 
-        $query = "INSERT INTO user(nickname, password, lastname, firstname, email, role) VALUES(?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user(account, password, lastname, firstname, email, role) VALUES(?, ?, ?, ?, ?, ?)";
         $stmt = self::prepare($query);
-        $stmt->bind_param("ssssss", $nickname, $password, $lastname, $firstname, $email, $role);
+        $stmt->bind_param("ssssss", $account, $password, $lastname, $firstname, $email, $role);
         $stmt->execute();
 
         return self::ERROR_OK;
@@ -50,6 +50,24 @@ class UserStore extends DB
         return self::ERROR_OK;
     }
 
+    public function readByAccount(&$user, string $account): int
+    {
+        if (!empty($string)) {
+            return self::ERROR_ACCOUNT;
+        }
+
+        $query = "SELECT * FROM user WHERE account = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("s", $account);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+        if ($user === null) {
+            return self::ERROR_ACCOUNT;
+        }
+
+        return self::ERROR_OK;
+    }
+
     public function readAll(): array
     {
         $query = "SELECT * FROM user";
@@ -57,7 +75,7 @@ class UserStore extends DB
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function update(int $id, string $nickname, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
+    public function update(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
             return self::ERROR_PASSWORD;
@@ -67,13 +85,13 @@ class UserStore extends DB
             return self::ERROR_EMAIL;
         }
 
-        if ($this->isDuplicateNickname($nickname)) {
-            return self::ERROR_NICKNAME;
+        if ($this->isDuplicateAccount($account)) {
+            return self::ERROR_ACCOUNT;
         }
 
-        $query = "UPDATE user SET nickname = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ? WHERE id = ?";
+        $query = "UPDATE user SET account = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ? WHERE id = ?";
         $stmt = self::prepare($query);
-        $stmt->bind_param("ssssssi", $nickname, $password, $lastname, $firstname, $email, $role, $id);
+        $stmt->bind_param("ssssssi", $account, $password, $lastname, $firstname, $email, $role, $id);
         $stmt->execute();
 
         return self::ERROR_OK;
@@ -134,8 +152,8 @@ class UserStore extends DB
             case self::ERROR_EMAIL:
                 $msg = "이메일 중복을 확인해주세요.";
                 break;
-            case self::ERROR_NICKNAME:
-                $msg = "닉네임 중복을 확인해주세요.";
+            case self::ERROR_ACCOUNT:
+                $msg = "계정 중복을 확인해주세요.";
                 break;
             case self::ERROR_ID:
                 $msg = "ID를 확인해주세요.";
@@ -151,11 +169,11 @@ class UserStore extends DB
         return $msg;
     }
 
-    private function isDuplicateNickname($nickname): bool
+    private function isDuplicateAccount($account): bool
     {
-        $query = "SELECT * FROM user WHERE nickname = ?";
+        $query = "SELECT * FROM user WHERE account = ?";
         $stmt = self::prepare($query);
-        $stmt->bind_param("s", $nickname);
+        $stmt->bind_param("s", $account);
         $stmt->execute();
         $result = $stmt->get_result();
 

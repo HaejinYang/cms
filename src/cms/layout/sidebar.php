@@ -15,6 +15,22 @@
         <!-- /.input-group -->
     </div>
 
+    <!-- 로그인 -->
+    <div class="well">
+        <h4>로그인</h4>
+        <form action="/cms/api/auth/login.php" method="post">
+            <div class="form-group">
+                <input name="account" type="text" class="form-control" placeholder="아이디">
+            </div>
+            <div class="input-group">
+                <input name="password" type="password" class="form-control" placeholder="비밀번호">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" name="login" type="submit">로그인</button>
+                </span>
+            </div>
+        </form> <!-- 로그인 폼 -->
+    </div> <!-- 로그인 -->
+
     <!-- Blog Categories Well -->
     <div class="well">
         <h4>Blog Categories</h4>
