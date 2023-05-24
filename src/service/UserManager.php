@@ -12,19 +12,19 @@ class UserManager
         $this->password = $password;
     }
 
-    public function login(): bool
+    public function login(): array|null
     {
         try {
             $user_dao = new UserStore();
             $result = $user_dao->readByAccount($user, $this->account);
             if ($result !== UserStore::ERROR_OK) {
-                return false;
+                return null;
             }
         } catch (mysqli_sql_exception $e) {
-            return false;
+            return null;
         }
 
-        return true;
+        return $user;
     }
 
     public function getErrorCode()

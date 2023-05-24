@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/service/UserManager.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
 $response_msg = "";
@@ -11,19 +12,24 @@ do {
     }
     $account = $_POST['account'];
     $password = $_POST['password'];
-    $user = new UserManager($account, $password);
-    $result = $user->login();
-    if (!$result) {
+    $user_manager = new UserManager($account, $password);
+    $user = $user_manager->login();
+    if ($user === null) {
         $response_msg = "로그인이 실패하였습니다.";
 
         break;
     }
 
+    $_SESSION['user_account'] = $user['account'];
+    $_SESSION['user_lastname'] = $user['lastname'];
+    $_SESSION['user_firstname'] = $user['firstname'];
+    $_SESSION['user_role'] = $user['role'];
+
     $is_complete = true;
 } while (false);
 
 if ($is_complete) {
-    echo goBackWithResponse("성공");
+    echo goBackWithResponse("로그인 성공");
 
     //header("Location: /cms/index.php");
 } else {

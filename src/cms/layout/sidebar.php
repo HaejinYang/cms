@@ -29,6 +29,8 @@
                 </span>
             </div>
         </form> <!-- 로그인 폼 -->
+        <?php
+        ?>
     </div> <!-- 로그인 -->
 
     <!-- Blog Categories Well -->

@@ -14,7 +14,14 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         Welcome to admin
+                        <small>
+                            <?php
+                            $h = "{$_SESSION['user_account']}";
+                            echo $h;
+                            ?>
+                        </small>
                     </h1>
+
                 </div>
             </div>
             <!-- /.row -->
