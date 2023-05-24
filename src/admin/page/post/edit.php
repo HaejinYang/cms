@@ -1,9 +1,9 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
 
 if (isset($_POST['edit'])) {
-    $post = new Post();
+    $post = new PostStore();
 
     $image_temp_path = "";
     $image = "";
@@ -29,7 +29,7 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$post = new Post();
+$post = new PostStore();
 $row = $post->read($id);
 ?>
 
@@ -83,9 +83,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             </div>
                             <select name="status">
                                 <?php
-                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
                                 $status = $row['status'];
-                                $status_arr = Post::getStatus();
+                                $status_arr = PostStore::getStatus();
                                 $options = ["draft" => "<option value='draft' ", "publish" => "<option value='publish'"];
                                 $html = "";
                                 foreach ($options as $key => $el) {

@@ -18,7 +18,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                     </h1>
                     <div class="col-xs-6">
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CategoryStore.php';
 
                         if (isset($_POST['add'])) {
                             $title = $_POST['title'];
@@ -26,7 +26,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                             if (empty($title)) {
                                 echo "빈 칸을 채워주세요";
                             } else {
-                                Category::create($title);
+                                CategoryStore::create($title);
                             }
                         }
                         ?>
@@ -42,12 +42,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                         <?php
                         // update category
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/page/category/update.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CategoryStore.php';
 
                         // edit cateogry
                         if (isset($_GET['edit'])) {
                             $id = $_GET['edit'];
-                            $title = Category::read($id);
+                            $title = CategoryStore::read($id);
                         }
                         ?>
                         <form action="" method="post">
@@ -78,17 +78,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php'; ?>
                             </thead>
                             <tbody>
                             <?php
-                            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CategoryStore.php';
 
                             // delete category
                             if (isset($_GET['delete'])) {
                                 $id = $_GET['delete'];
-                                Category::delete($id);
+                                CategoryStore::delete($id);
                                 header("Location: index.php");
                             }
 
                             // find all category
-                            $result = Category::readAll();
+                            $result = CategoryStore::readAll();
                             $el = "";
                             while ($row = $result->fetch_assoc()) {
                                 $html = "

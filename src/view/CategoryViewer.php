@@ -1,12 +1,12 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CategoryStore.php';
 
 class CategoryViewer
 {
     public static function viewInSelect(int $focus_id)
     {
-        $result = Category::readAll();
+        $result = CategoryStore::readAll();
         $el = "<select name='category_id' id='category_id'>";
         while ($row = $result->fetch_assoc()) {
             $html = "<option value={$row['id']}";
@@ -24,7 +24,7 @@ class CategoryViewer
 
     public static function viewInList(int $limit = -1)
     {
-        $result = Category::readLimit($limit);
+        $result = CategoryStore::readLimit($limit);
         $el = '';
         while ($row = $result->fetch_assoc()) {
             $li = "<li><a href='/cms/index.php?category_id={$row['id']}'>{$row['title']}</a></li>";

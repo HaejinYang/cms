@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
-class User extends DB
+class UserStore extends DB
 {
     const ERROR_OK = 0;
     const ERROR_PASSWORD = 1;

@@ -2,7 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
-class Post extends DB
+class PostStore extends DB
 {
     private $result;
 
@@ -36,7 +36,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result->fetch_assoc();
     }
 
-    public function readByCategoryId(int $id): Post
+    public function readByCategoryId(int $id): PostStore
     {
         $stmt = self::prepare("SELECT * FROM post WHERE category_id = ?");
         $stmt->bind_param("i", $id);
@@ -50,7 +50,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $this;
     }
 
-    public function readAll(): Post
+    public function readAll(): PostStore
     {
         $this->result = self::query("SELECT * FROM post");
 

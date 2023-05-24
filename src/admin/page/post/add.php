@@ -1,9 +1,9 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
 
 if (isset($_POST['create'])) {
-    $post = new Post();
+    $post = new PostStore();
     $date = date('y-m-d');
     $comment_count = 0;
     $post->create($_POST['title'], $_POST['category_id'], $_POST['author'], $_POST['status'], $_POST['tags'], $_POST['content'],
@@ -56,9 +56,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             </div>
                             <select name="status">
                                 <?php
-                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
 
-                                $status_arr = Post::getStatus();
+                                $status_arr = PostStore::getStatus();
                                 $el = "";
                                 foreach ($status_arr as $key => $value) {
                                     $html = "<option value='{$key}'>{$value}</option>";

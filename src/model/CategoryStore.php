@@ -8,7 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
  * property, variable not defined. 그런데, 구별을 위해 스네이크가 나아보임.
  */
 
-class Category extends DB
+class CategoryStore extends DB
 {
     public static function create($title): bool
     {

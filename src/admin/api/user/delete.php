@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
 $response_msg = "";
 $is_success = false;
@@ -11,10 +11,10 @@ do {
     }
     $id = $_GET['id'];
     try {
-        $user_dao = new User();
+        $user_dao = new UserStore();
         $result = $user_dao->delete($id);
-        if ($result !== User::ERROR_OK) {
-            $response_msg = User::getErrorCodeToMsg($result);
+        if ($result !== UserStore::ERROR_OK) {
+            $response_msg = UserStore::getErrorCodeToMsg($result);
 
             break;
         }

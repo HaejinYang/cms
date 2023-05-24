@@ -32,10 +32,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </thead>
                         <tbody>
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
 
                         try {
-                            $user_dao = new User();
+                            $user_dao = new UserStore();
                             $rows = $user_dao->readAll();
                             $el = "";
                             foreach ($rows as $row) {

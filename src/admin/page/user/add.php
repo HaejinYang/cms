@@ -53,8 +53,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             </div>
                             <select name="role">
                                 <?php
-                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/User.php';
-                                $roles = User::getAllRole();
+                                require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
+                                $roles = UserStore::getAllRole();
                                 $el = "";
                                 foreach ($roles as $key => $value) {
                                     $html = "<option value='{$key}'>{$value}</option>";

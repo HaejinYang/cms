@@ -33,13 +33,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </thead>
                         <tbody>
                         <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Category.php';
-                        $post = new Post();
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
+                        require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CategoryStore.php';
+                        $post = new PostStore();
                         $post->readAll();
                         $el = "";
                         while ($row = $post->next()) {
-                            $category_title = Category::read($row['category_id']);
+                            $category_title = CategoryStore::read($row['category_id']);
 
                             $html = "<tr>
                                         <td>{$row['id']}</td>

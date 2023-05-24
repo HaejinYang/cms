@@ -1,7 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
 
-$post = new Post();
+$post = new PostStore();
 $result = null;
 if (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];
@@ -18,7 +18,7 @@ while ($row = $result->next()) {
         break;
     }
     $status = $row['status'];
-    if (!Post::isPublished($status)) {
+    if (!PostStore::isPublished($status)) {
         continue;
     }
 

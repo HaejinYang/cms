@@ -13,7 +13,7 @@
         <div class="col-md-8">
             <!-- Blog Post -->
             <?php
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
             require_once $_SERVER['DOCUMENT_ROOT'] . '/view/CommentViewer.php';
 
 
@@ -26,9 +26,9 @@
                 }
 
                 $id = $_GET['id'];
-                $post = new Post();
+                $post = new PostStore();
                 $row = $post->read($id);
-                if (!Post::isPublished($row['status'])) {
+                if (!PostStore::isPublished($row['status'])) {
                     $is_published = false;
                     break;
                 }

@@ -5,9 +5,9 @@ do {
         break;
     }
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Post.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
 
-    $post = new Post();
+    $post = new PostStore();
     $post->delete($_GET['id']);
 
 } while (false);
