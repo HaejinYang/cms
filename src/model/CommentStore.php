@@ -39,6 +39,14 @@ class CommentStore extends DB
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function countAllComments(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM comment");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
     /*
      * status: approve, unapprove
      */

@@ -75,6 +75,14 @@ class UserStore extends DB
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function countAllUsers(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM user");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
     public function update(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
