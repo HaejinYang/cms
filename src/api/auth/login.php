@@ -20,6 +20,7 @@ do {
         break;
     }
 
+    $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_account'] = $user['account'];
     $_SESSION['user_lastname'] = $user['lastname'];
     $_SESSION['user_firstname'] = $user['firstname'];

@@ -81,6 +81,28 @@ class UserStore extends DB
             return self::ERROR_PASSWORD;
         }
 
+        if ($this->isDuplicateEmail($email, $id)) {
+            return self::ERROR_EMAIL;
+        }
+
+        if ($this->isDuplicateAccount($account, $id)) {
+            return self::ERROR_ACCOUNT;
+        }
+
+        $query = "UPDATE user SET account = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("ssssssi", $account, $password, $lastname, $firstname, $email, $role, $id);
+        $stmt->execute();
+
+        return self::ERROR_OK;
+    }
+
+    public function updateItSelf(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
+    {
+        if ($this->isInvalidPassword($password, $password_check)) {
+            return self::ERROR_PASSWORD;
+        }
+
         if ($this->isDuplicateEmail($email)) {
             return self::ERROR_EMAIL;
         }
@@ -169,26 +191,42 @@ class UserStore extends DB
         return $msg;
     }
 
-    private function isDuplicateAccount($account): bool
+    private function isDuplicateAccount(string $account, int $except_id = -1): bool
     {
         $query = "SELECT * FROM user WHERE account = ?";
         $stmt = self::prepare($query);
         $stmt->bind_param("s", $account);
         $stmt->execute();
         $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return false;
+        }
 
-        return $result->num_rows !== 0;
+        $row = $result->fetch_assoc();
+        if ($row['id'] === $except_id) {
+            return false;
+        }
+
+        return true;
     }
 
-    private function isDuplicateEmail(string $email): bool
+    private function isDuplicateEmail(string $email, int $except_id = -1): bool
     {
         $query = "SELECT * FROM user WHERE email = ?";
         $stmt = self::prepare($query);
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return false;
+        }
 
-        return $result->num_rows !== 0;
+        $row = $result->fetch_assoc();
+        if ($row['id'] === $except_id) {
+            return false;
+        }
+
+        return true;
     }
 
     private function isInvalidPassword(string $password, string $password_check): bool

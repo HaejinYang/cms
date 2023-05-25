@@ -71,7 +71,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i>프로필</a>
+                <a href="/admin/page/profile/index.php"><i class="fa fa-fw fa-dashboard"></i>프로필</a>
             </li>
         </ul>
     </div>
