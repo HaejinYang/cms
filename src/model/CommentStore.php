@@ -47,6 +47,22 @@ class CommentStore extends DB
         return $row[0];
     }
 
+    public function countAllApproved(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM comment WHERE status = 'approve'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
+    public function countAllUnapproved(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM comment WHERE status = 'unapprove'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
     /*
      * status: approve, unapprove
      */

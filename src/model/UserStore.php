@@ -83,6 +83,22 @@ class UserStore extends DB
         return $row[0];
     }
 
+    public function countAllSubscribers(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM user WHERE role = 'subscriber'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
+    public function countAllAdmins(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM user WHERE role = 'admin'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
     public function update(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
