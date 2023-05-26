@@ -10,7 +10,7 @@ class DynamicQuery
     private array $set_clause_data;
     private array $where_clause_data;
 
-    public function __construct($mysqli)
+    public function __construct(&$mysqli)
     {
         $this->connection = $mysqli;
         $this->clearProperties();;
@@ -44,7 +44,7 @@ class DynamicQuery
 
     public function set($key, $val): DynamicQuery
     {
-        $this->where_clause_query .= "{$key} = ?, ";
+        $this->where_clause_query .= " {$key} = ?, ";
         $this->set_clause_data[] = $val;
 
         return $this;
@@ -53,7 +53,7 @@ class DynamicQuery
     public function setByArray($params): DynamicQuery
     {
         foreach ($params as $key => $val) {
-            $this->where_clause_query .= "{$key} = ?, ";
+            $this->where_clause_query .= " {$key} = ?, ";
             $this->set_clause_data[] = $val;
         }
 
@@ -62,7 +62,7 @@ class DynamicQuery
 
     public function where($key, $val): DynamicQuery
     {
-        $this->where_clause_query .= "{$key} = ? ";
+        $this->where_clause_query .= " {$key} = ? ";
         $this->where_clause_data[] = $val;
 
         return $this;
@@ -71,7 +71,7 @@ class DynamicQuery
     public function whereByArray($params): DynamicQuery
     {
         foreach ($params as $key => $val) {
-            $this->where_clause_data .= "{$key} = ?, ";
+            $this->where_clause_data .= " {$key} = ?, ";
             $this->where_clause_data[] = $val;
         }
 
@@ -80,29 +80,30 @@ class DynamicQuery
 
     public function and(): DynamicQuery
     {
-        $this->where_clause_query .= "and ";
+        $this->where_clause_query .= " and ";
 
         return $this;
     }
 
     public function or(): DynamicQuery
     {
-        $this->where_clause_query .= "or ";
+        $this->where_clause_query .= " or ";
 
         return $this;
     }
 
-    public function run(): DynamicQuery
+    public function run(): bool
     {
         $query = $this->getQuery();
         $stmt = $this->connection->prepare($query);
         $types = $this->createTypes($this->set_clause_data);
         $types .= $this->createTypes($this->where_clause_data);
         $stmt->bind_param($types, ...array_merge($this->set_clause_data, $this->where_clause_data));
-        $stmt->exectue();
+
+        return $stmt->exectue();
     }
 
-    public function getQuery(): DynamicQuery
+    private function getQuery(): DynamicQuery
     {
         return $this->update_table_query . " SET " . $this->set_clause_query . " WHERE " . $this->where_clause_query;
     }
