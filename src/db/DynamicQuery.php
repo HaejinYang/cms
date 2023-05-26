@@ -4,7 +4,7 @@ class DynamicQuery
 {
     private mysqli $connection;
     private string $table;
-    private string $update_table_query;
+    private string $update_query;
     private string $set_clause_query;
     private string $where_clause_query;
     private array $set_clause_data;
@@ -23,28 +23,31 @@ class DynamicQuery
 
     private function clearProperties(): void
     {
+        $this->table = "";
         $this->set_clause_data = [];
         $this->where_clause_data = [];
-        $this->update_table_query = "";
+        $this->update_query = "";
         $this->set_clause_query = "";
         $this->where_clause_query = "";
     }
 
-    public function table($table): void
+    public function table($table): DynamicQuery
     {
         $this->table = $table;
+
+        return $this;
     }
 
     public function update(): DynamicQuery
     {
-        $this->update_table_query = "UPDATE {$this->table} ";
+        $this->update_query = "UPDATE ";
 
         return $this;
     }
 
     public function set($key, $val): DynamicQuery
     {
-        $this->where_clause_query .= " {$key} = ?, ";
+        $this->set_clause_query .= " {$key} = ?, ";
         $this->set_clause_data[] = $val;
 
         return $this;
@@ -53,7 +56,7 @@ class DynamicQuery
     public function setByArray($params): DynamicQuery
     {
         foreach ($params as $key => $val) {
-            $this->where_clause_query .= " {$key} = ?, ";
+            $this->set_clause_query .= " {$key} = ?, ";
             $this->set_clause_data[] = $val;
         }
 
@@ -80,6 +83,7 @@ class DynamicQuery
 
     public function and(): DynamicQuery
     {
+        $this->where_clause_query = rtrim($this->where_clause_query, ", ");
         $this->where_clause_query .= " and ";
 
         return $this;
@@ -87,6 +91,7 @@ class DynamicQuery
 
     public function or(): DynamicQuery
     {
+        $this->where_clause_query = rtrim($this->where_clause_query, ", ");
         $this->where_clause_query .= " or ";
 
         return $this;
@@ -100,15 +105,15 @@ class DynamicQuery
         $types .= $this->createTypes($this->where_clause_data);
         $stmt->bind_param($types, ...array_merge($this->set_clause_data, $this->where_clause_data));
 
-        return $stmt->exectue();
+        return $stmt->execute();
     }
 
-    private function getQuery(): DynamicQuery
+    private function getQuery(): string
     {
-        return $this->update_table_query . " SET " . $this->set_clause_query . " WHERE " . $this->where_clause_query;
+        return $this->update_query . " {$this->table} " . " SET " . rtrim($this->set_clause_query, ", ") . " WHERE " . rtrim($this->where_clause_query, ", ");
     }
 
-    private function createTypes($data): DynamicQuery
+    private function createTypes($data): string
     {
         $types = "";
         foreach ($data as $val) {
