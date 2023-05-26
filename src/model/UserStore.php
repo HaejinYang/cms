@@ -75,6 +75,30 @@ class UserStore extends DB
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function countAllUsers(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM user");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
+    public function countAllSubscribers(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM user WHERE role = 'subscriber'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
+    public function countAllAdmins(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM user WHERE role = 'admin'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
     public function update(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
@@ -86,28 +110,6 @@ class UserStore extends DB
         }
 
         if ($this->isDuplicateAccount($account, $id)) {
-            return self::ERROR_ACCOUNT;
-        }
-
-        $query = "UPDATE user SET account = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ? WHERE id = ?";
-        $stmt = self::prepare($query);
-        $stmt->bind_param("ssssssi", $account, $password, $lastname, $firstname, $email, $role, $id);
-        $stmt->execute();
-
-        return self::ERROR_OK;
-    }
-
-    public function updateItSelf(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
-    {
-        if ($this->isInvalidPassword($password, $password_check)) {
-            return self::ERROR_PASSWORD;
-        }
-
-        if ($this->isDuplicateEmail($email)) {
-            return self::ERROR_EMAIL;
-        }
-
-        if ($this->isDuplicateAccount($account)) {
             return self::ERROR_ACCOUNT;
         }
 

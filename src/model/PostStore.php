@@ -45,6 +45,29 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function countAllPosts(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM post");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
+    public function countAllDraft(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM post WHERE status = 'draft'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
+    public function countAllPublish(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM post WHERE status = 'publish'");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
 
     /*
      * 이미지가 변경되지 않았다면, $image_temp_path에 빈문자열 대입

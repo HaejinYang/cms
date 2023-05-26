@@ -29,6 +29,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             <th>태그</th>
                             <th>댓글</th>
                             <th>날짜</th>
+                            <th colspan="3">관리</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,8 +52,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td>{$row['tags']}</td>
                                         <td>{$row['comment_count']}</td>
                                         <td>{$row['date']}</td>
-                                        <td><a href='/admin/page/post/delete.php?id={$row['id']}'>삭제</a></td>
+                                        <td><a href='/cms/page/post/index.php?id={$row['id']}'>보기</a></td>
                                         <td><a href='/admin/page/post/edit.php?id={$row['id']}'>수정</a></td>
+                                        <td><a href='/admin/page/post/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                             $el .= $html;
                         }

@@ -45,6 +45,14 @@ class CategoryStore extends DB
         return self::query("SELECT * FROM category LIMIT {$limit}");
     }
 
+    public static function countAllCategories(): int
+    {
+        $result = self::query("SELECT COUNT(*) FROM category");
+        $row = $result->fetch_array();
+
+        return $row[0];
+    }
+
     public static function update(int $id, string $title): bool
     {
         $query = "UPDATE category SET title=? WHERE id=?";

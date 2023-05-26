@@ -26,6 +26,11 @@
             </div>
             <!-- /.row -->
 
+            <!-- row -->
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/dashboard.php'; ?>
+            <!-- row -->
+
+
         </div>
         <!-- /.container-fluid -->
 

@@ -58,7 +58,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td>{$row['date']}</td>
                                         <td><a href='/api/comment/approve.php?id={$row['id']}'>승인</a></td>
                                         <td><a href='/api/comment/unapprove.php?id={$row['id']}'>거부</a></td>
-                                        <td><a href='/api/comment/edit.php?id={$row['id']}'>수정</a></td>
                                         <td><a href='/api/comment/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                             $el .= $html;
