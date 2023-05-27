@@ -4,6 +4,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 class PostStore extends DB
 {
+    const ERROR_OK = 0;
+    const ERROR_FAIL = 1;
+
     public function create(string $title, int $category_id, string $author, string $status, string $tags,
                            string $content, string $image, string $image_temp_path, string $date, string $comment_count): bool
     {
@@ -108,12 +111,16 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result;
     }
 
-    public function updateCommentCount(int $id)
+    public function updateCommentCount(int $id): int
     {
         $query = "UPDATE post SET comment_count = comment_count + 1 WHERE id = ?";
         $stmt = self::prepare($query);
         $stmt->bind_param("i", $id);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            return self::ERROR_FAIL;
+        }
+
+        return self::ERROR_OK;
     }
 
     public function updateStatus(int $id, string $status)
