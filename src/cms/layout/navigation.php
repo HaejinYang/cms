@@ -20,7 +20,14 @@
                 echo CategoryViewer::viewInList(5);
 
                 ?>
-                <li><a href="/admin">Admin</a></li>
+                <li><a href="/admin">관리자</a></li>
+                <?php
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/service/UserManager.php';
+                $user_manager = new UserManager();
+                if ($user_manager->isAdmin() && isset($_GET['id'])) {
+                    echo "<li><a href='/admin/page/post/edit.php?id={$_GET['id']}'>게시글 수정</a></li>";
+                }
+                ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

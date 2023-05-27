@@ -12,9 +12,9 @@ do {
     }
     $account = $_POST['account'];
     $password = $_POST['password'];
-    $user_manager = new UserManager($account, $password);
-    $user = $user_manager->login();
-    if ($user === null) {
+    $user_manager = new UserManager();
+    $result = $user_manager->login($user, $account, $password);
+    if ($result !== UserManager::ERROR_OK) {
         $response_msg = "로그인이 실패하였습니다.";
 
         break;
