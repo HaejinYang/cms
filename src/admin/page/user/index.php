@@ -26,7 +26,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                             <th>이름</th>
                             <th>Email</th>
                             <th>역할</th>
-                            <th>날짜</th>
+                            <th>등록일</th>
+                            <th>수정일</th>
                             <th colspan="3">관리</th>
                         </tr>
                         </thead>
@@ -46,11 +47,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td>{$row['firstname']}</td>
                                         <td>{$row['email']}</td>
                                         <td>{$row['role']}</td>
-                                        <td>{$row['date']}</td>
+                                        <td>{$row['registered_at']}</td>
+                                        <td>{$row['updated_at']}</td>
                                         <td><a href='/api/user/role.php?id={$row['id']}&role=admin'>관리자</a></td>
                                         <td><a href='/api/user/role.php?id={$row['id']}&role=subscriber'>구독자</a></td>
                                         <td><a href='/admin/page/user/edit.php?id={$row['id']}'>수정</a></td>
-                                        <td><a href='/api/user/delete.php?id={$row['id']}'>삭제</a></td>
+                                        <td><a onClick=\"javascript: return confirm('계정: {$row['account']}, 정말로 삭제하겠습니까?');\" href='/api/user/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                                 $el .= $html;
                             }

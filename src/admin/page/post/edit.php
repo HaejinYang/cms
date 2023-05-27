@@ -22,7 +22,7 @@ if (isset($_POST['edit'])) {
 }
 
 if (!isset($_GET['id'])) {
-    echo goBackWithResponse("잘못된 요청입니다.");
+    echo goBackWithAlert("잘못된 요청입니다.");
 
     return;
 }
@@ -31,7 +31,7 @@ $id = $_GET['id'];
 $post = new PostStore();
 $row = $post->read($id);
 if ($row === null) {
-    echo goBackWithResponse("게시글이 존재하지 않습니다.");
+    echo goBackWithAlert("게시글이 존재하지 않습니다.");
 }
 ?>
 

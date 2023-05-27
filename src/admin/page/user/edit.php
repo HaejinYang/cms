@@ -17,6 +17,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         유저 수정
                     </h1>
                     <?php
+                    if (isset($_SESSION['API_RESPONSE_RESULT'])) {
+                        $msg = $_SESSION['API_RESPONSE_MSG'];
+                        $is_api_success = $_SESSION['API_RESPONSE_RESULT'];
+                        unset($_SESSION['API_RESPONSE_MSG']);
+                        unset($_SESSION['API_RESPONSE_RESULT']);
+
+                        if ($is_api_success) {
+                            echo "<p class='bg-success'>{$msg}</p>";
+                        } else {
+                            echo "<p class='bg-danger'>{$msg}</p>";
+                        }
+                    }
+                    ?>
+
+                    <?php
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/view/UserViewer.php';
                     require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
@@ -55,13 +70,20 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
 
                         <div class="form-group">
+                            <div>
+                                <label for="title">역할</label>
+                            </div>
+                            {$select_role}
+                        </div>
+                        
+                        <div class="form-group">
                             <label for="title">비밀번호</label>
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" name="password" placeholder="기존 비밀번호를 사용한다면 비워주세요">
                         </div>
 
                         <div class="form-group">
                             <label for="title">비밀번호확인</label>
-                            <input type="password" class="form-control" name="password_check">
+                            <input type="password" class="form-control" name="password_check" placeholder="기존 비밀번호를 사용한다면 비워주세요">
                         </div>
 
                         <div class="form-group">
@@ -80,14 +102,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         </div>
 
                         <div class="form-group">
-                            <div>
-                                <label for="title">역할</label>
-                            </div>
-                            {$select_role}
-                        </div>
-
-                        <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="edit" value="추가">
+                            <input class="btn btn-primary" type="submit" name="edit" value="수정">
                         </div>
                     </form>
 EOT;
@@ -99,7 +114,7 @@ EOT;
                     } while (false);
 
                     if (!$is_success) {
-                        echo goBackWithResponse($response_msg);
+                        echo goBackWithAlert($response_msg);
                     }
                     ?>
                 </div>

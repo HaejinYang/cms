@@ -100,7 +100,7 @@ EOT;
                     } while (false);
 
                     if (!$is_success) {
-                        echo goBackWithResponse($response_msg);
+                        echo goBackWithAlert($response_msg);
                     }
                     ?>
                 </div>

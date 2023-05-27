@@ -53,5 +53,5 @@ do {
 if ($is_success) {
     header("Location: /cms/page/post/index.php?id={$post_id}");
 } else {
-    echo goBackWithResponse($response_msg);
+    echo goBackWithAlert($response_msg);
 }

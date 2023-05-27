@@ -32,5 +32,5 @@ do {
 if ($is_complete) {
     header("Location: /admin/index.php");
 } else {
-    echo goBackWithResponse($response_msg);
+    echo goBackWithAlert($response_msg);
 }
