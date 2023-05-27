@@ -52,7 +52,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                         <td><a href='/api/user/role.php?id={$row['id']}&role=admin'>관리자</a></td>
                                         <td><a href='/api/user/role.php?id={$row['id']}&role=subscriber'>구독자</a></td>
                                         <td><a href='/admin/page/user/edit.php?id={$row['id']}'>수정</a></td>
-                                        <td><a href='/api/user/delete.php?id={$row['id']}'>삭제</a></td>
+                                        <td><a onClick=\"javascript: return confirm('계정: {$row['account']}, 정말로 삭제하겠습니까?');\" href='/api/user/delete.php?id={$row['id']}'>삭제</a></td>
                                     </tr>";
                                 $el .= $html;
                             }
