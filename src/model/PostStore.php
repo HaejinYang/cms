@@ -132,6 +132,11 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $stmt->execute();
     }
 
+    public function getLastCreateId(): int
+    {
+        return self::getInstance()->insert_id;
+    }
+
     /*
      * 모든 게시글이 가질 수 있는 공개 상태를 반환한다.
      */

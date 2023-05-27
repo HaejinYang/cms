@@ -54,7 +54,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                     </h1>
                     <?php
                     if ($is_edit_completed) {
-                        echo "<p>포스트 수정됨. <a href='/cms/index.php?id={$row['id']}'>바로가기</a> 또는 <a href='/admin/page/post/index.php'>다른 게시물 수정하기</a></p>";
+                        echo "<p class='bg-success'>포스트 수정됨. <a href='/cms/index.php?id={$row['id']}'>바로가기</a> 또는 <a href='/admin/page/post/index.php'>다른 게시물 수정하기</a></p>";
                     }
                     ?>
                     <form action="" method="post" enctype="multipart/form-data">
