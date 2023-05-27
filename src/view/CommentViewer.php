@@ -16,7 +16,7 @@ class CommentViewer
             $rows = $this->dao->readByPostId($post_id);
             $el = "";
             foreach ($rows as $row) {
-                if ($row['status'] !== 'approve') {
+                if ($row['status'] !== 'approved') {
                     continue;
                 }
 
