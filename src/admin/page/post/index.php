@@ -37,7 +37,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
                         require_once $_SERVER['DOCUMENT_ROOT'] . '/model/CategoryStore.php';
                         $post = new PostStore();
-                        $rows = $post->readAll();
+                        $rows = $post->readAll(999);
                         $el = "";
                         foreach ($rows as $row) {
                             $category_title = CategoryStore::read($row['category_id']);

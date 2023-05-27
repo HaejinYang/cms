@@ -8,6 +8,8 @@ if (isset($_POST['create'])) {
     $comment_count = 0;
     $post->create($_POST['title'], $_POST['category_id'], $_POST['author'], $_POST['status'], $_POST['tags'], $_POST['content'],
         $_FILES['image']['name'], $_FILES['image']['tmp_name'], $date, $comment_count);
+
+
 }
 ?>
 

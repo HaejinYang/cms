@@ -16,7 +16,6 @@
             require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
             require_once $_SERVER['DOCUMENT_ROOT'] . '/view/CommentViewer.php';
 
-
             // 게시글 Id를 기준으로 보여줌.
             $post_id = null;
             $is_published = true;

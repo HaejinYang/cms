@@ -12,7 +12,6 @@
 <!-- summernote 위지위그 -->
 <script>
     $(document).ready(function () {
-        console.log("AAAAAAA");
         $('#summernote').summernote({
             height: 300
         });

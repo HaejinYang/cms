@@ -6,17 +6,21 @@ $rows = null;
 if (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];
     $rows = $post->readByCategoryId($category_id);
+} else if (isset($_GET['author'])) {
+    $author = $_GET['author'];
+    $rows = $post->readByAuthor($author);
 } else {
     $rows = $post->readAll();
 }
 
-$postCount = 0;
-const MAX_POST_COUNT = 3;
+if ($rows === null) {
+    echo "<h1> 게시글이 없습니다.</h1>";
+
+    return;
+}
+
 $el = "";
 foreach ($rows as $row) {
-    if ($postCount >= MAX_POST_COUNT) {
-        break;
-    }
     $status = $row['status'];
     if (!PostStore::isPublished($status)) {
         continue;
@@ -28,11 +32,11 @@ foreach ($rows as $row) {
                 <a href="/cms/page/post/index.php?id={$row['id']}">{$row['title']}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php">{$row['author']}</a>
+                    by <a href="/cms/index.php?author={$row['author']}">{$row['author']}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$row['date']}</p>
                 <hr>
-                <img class="img-responsive" src="/{$row['image']}" alt="">
+                <a href="/cms/page/post/index.php?id={$row['id']}"><img class="img-responsive" src="/{$row['image']} " alt=""></a>
                 <hr>
                 <p>{$content}</p>
                 <a class="btn btn-primary" href="/cms/page/post/index.php?id={$row['id']}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -40,8 +44,6 @@ foreach ($rows as $row) {
                 <hr>
 EOT;
     $el .= $html;
-
-    $postCount++;
 }
 
 return $el;

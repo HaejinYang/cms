@@ -29,20 +29,30 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result->fetch_assoc();
     }
 
-    public function readByCategoryId(int $id): array|null
+    public function readByCategoryId(int $id, int $max_count = 3): array|null
     {
-        $stmt = self::prepare("SELECT * FROM post WHERE category_id = ?");
-        $stmt->bind_param("i", $id);
+        $stmt = self::prepare("SELECT * FROM post WHERE category_id = ? LIMIT ?");
+        $stmt->bind_param("ii", $id, $max_count);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readAll(): array
+    public function readAll(int $max_count = 3): array
     {
-        $result = self::query("SELECT * FROM post");
+        $result = self::query("SELECT * FROM post LIMIT {$max_count}");
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function readByAuthor(string $author): array
+    {
+        $converted_author = $author; //'%' . $author . '%';
+        $stmt = self::prepare("SELECT * FROM post WHERE author LIKE ?");
+        $stmt->bind_param("s", $converted_author);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function countAllPosts(): int
