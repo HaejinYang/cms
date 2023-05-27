@@ -1,13 +1,15 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
-
+$is_add_competed = false;
 if (isset($_POST['create'])) {
     $post = new PostStore();
     $date = date('y-m-d');
     $comment_count = 0;
     $post->create($_POST['title'], $_POST['category_id'], $_POST['author'], $_POST['status'], $_POST['tags'], $_POST['content'],
         $_FILES['image']['name'], $_FILES['image']['tmp_name'], $date, $comment_count);
+
+    $is_add_competed = true;
 }
 ?>
 
@@ -30,6 +32,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                         게시글 추가
                     </h1>
                     <form action="" method="post" enctype="multipart/form-data">
+                        <?php
+                        if ($is_add_competed) {
+                            $post = new PostStore();
+                            $id = $post->getLastCreateId();
+                            echo "<p class='bg-success'>포스트 추가됨. <a href='/cms/page/post/index.php?id={$id}'>바로가기</a></p>";
+                        }
+                        ?>
                         <div class="form-group">
                             <label for="title">제목</label>
                             <input type="text" class="form-control" name="title">
@@ -81,7 +90,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
                         <div class="form-group">
                             <label for="content">내용</label>
-                            <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
+                            <textarea id="summernote" class="form-control" name="content" id="" cols="30"
+                                      rows="10"></textarea>
                         </div>
 
                         <div class="form-group">

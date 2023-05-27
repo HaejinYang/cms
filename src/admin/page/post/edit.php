@@ -1,7 +1,8 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
 
+$is_edit_completed = false;
 if (isset($_POST['edit'])) {
     $post = new PostStore();
 
@@ -17,13 +18,11 @@ if (isset($_POST['edit'])) {
             $_POST['content'], date('y-m-d'), $_POST['comment_count']);
     }
 
-    header("Location: /admin/page/post/index.php");
-
-    return;
+    $is_edit_completed = true;
 }
 
 if (!isset($_GET['id'])) {
-    header("Location: /admin/page/post/index.php");
+    echo goBackWithResponse("잘못된 요청입니다.");
 
     return;
 }
@@ -32,7 +31,7 @@ $id = $_GET['id'];
 $post = new PostStore();
 $row = $post->read($id);
 if ($row === null) {
-    header("Location: /admin/page/post/index.php");
+    echo goBackWithResponse("게시글이 존재하지 않습니다.");
 }
 ?>
 
@@ -47,13 +46,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
     <div id="page-wrapper">
 
         <div class="container-fluid">
-
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        게시글 추가
+                        게시글 수정
                     </h1>
+                    <?php
+                    if ($is_edit_completed) {
+                        echo "<p class='bg-success'>포스트 수정됨. <a href='/cms/index.php?id={$row['id']}'>바로가기</a> 또는 <a href='/admin/page/post/index.php'>다른 게시물 수정하기</a></p>";
+                    }
+                    ?>
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Id</label>
@@ -89,7 +92,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
                                 $status = $row['status'];
                                 $status_arr = PostStore::getStatus();
-                                $options = ["draft" => "<option value='draft' ", "publish" => "<option value='publish'"];
+                                $options = ["draft" => "<option value='draft' ", "published" => "<option value='published'"];
                                 $html = "";
                                 foreach ($options as $key => $el) {
                                     if ($key === $status) {
@@ -126,7 +129,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
                         <div class="form-group">
                             <label for="content">내용</label>
-                            <textarea class="form-control" name="content" id="" cols="30"
+                            <textarea id="summernote" class="form-control" name="content" id="" cols="30"
                                       rows="10"><?php echo $row['content'] ?></textarea>
                         </div>
 

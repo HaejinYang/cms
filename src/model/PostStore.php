@@ -4,6 +4,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 class PostStore extends DB
 {
+    const ERROR_OK = 0;
+    const ERROR_FAIL = 1;
+
     public function create(string $title, int $category_id, string $author, string $status, string $tags,
                            string $content, string $image, string $image_temp_path, string $date, string $comment_count): bool
     {
@@ -29,20 +32,30 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result->fetch_assoc();
     }
 
-    public function readByCategoryId(int $id): array|null
+    public function readByCategoryId(int $id, int $max_count = 3): array|null
     {
-        $stmt = self::prepare("SELECT * FROM post WHERE category_id = ?");
-        $stmt->bind_param("i", $id);
+        $stmt = self::prepare("SELECT * FROM post WHERE category_id = ? LIMIT ?");
+        $stmt->bind_param("ii", $id, $max_count);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readAll(): array
+    public function readAll(int $max_count = 3): array
     {
-        $result = self::query("SELECT * FROM post");
+        $result = self::query("SELECT * FROM post LIMIT {$max_count}");
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function readByAuthor(string $author): array
+    {
+        $converted_author = $author; //'%' . $author . '%';
+        $stmt = self::prepare("SELECT * FROM post WHERE author LIKE ?");
+        $stmt->bind_param("s", $converted_author);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function countAllPosts(): int
@@ -63,7 +76,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public function countAllPublish(): int
     {
-        $result = self::query("SELECT COUNT(*) FROM post WHERE status = 'publish'");
+        $result = self::query("SELECT COUNT(*) FROM post WHERE status = 'published'");
         $row = $result->fetch_array();
 
         return $row[0];
@@ -98,11 +111,23 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $result;
     }
 
-    public function updateCommentCount(int $id)
+    public function updateCommentCount(int $id): int
     {
         $query = "UPDATE post SET comment_count = comment_count + 1 WHERE id = ?";
         $stmt = self::prepare($query);
         $stmt->bind_param("i", $id);
+        if (!$stmt->execute()) {
+            return self::ERROR_FAIL;
+        }
+
+        return self::ERROR_OK;
+    }
+
+    public function updateStatus(int $id, string $status)
+    {
+        $query = "UPDATE post SET status = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("si", $status, $id);
         $stmt->execute();
     }
 
@@ -114,18 +139,23 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $stmt->execute();
     }
 
+    public function getLastCreateId(): int
+    {
+        return self::getInstance()->insert_id;
+    }
+
     /*
      * 모든 게시글이 가질 수 있는 공개 상태를 반환한다.
      */
     public static function getStatus(): array
     {
-        $status = ["draft" => "보류", "publish" => "공개"];
+        $status = ["draft" => "보류", "published" => "공개"];
 
         return $status;
     }
 
     public static function isPublished($status): bool
     {
-        return $status === "publish";
+        return $status === "published";
     }
 }

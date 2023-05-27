@@ -27,7 +27,8 @@ if (!(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin')) {
 
     <!-- Custom Fonts -->
     <link href="/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <!-- summernote 위지위그-->
+    <link href="/admin/summernote-0.8.18-dist/summernote.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,7 +36,10 @@ if (!(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin')) {
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- 구글 차트 -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- summernote 위지위그-->
 </head>
 
 <body>

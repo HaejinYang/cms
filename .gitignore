@@ -3,3 +3,4 @@
 .env
 /src/vendor
 /src/images
+/src/admin/summernote-0.8.18-dist/

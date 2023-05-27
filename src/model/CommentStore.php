@@ -3,13 +3,20 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 class CommentStore extends DB
 {
-    public function create(int $post_id, string $author, string $email, string $content, string $status, string $date): bool
+    const ERROR_OK = 0;
+    const ERROR_FAIL = 1;
+
+    public function create(int $post_id, string $author, string $email, string $content, string $status, string $date): int
     {
         $query = "INSERT INTO comment(post_id, author, email, content, status, date) VALUES(?, ?, ?, ?, ?, ?)";
         $stmt = self::prepare($query);
         $stmt->bind_param("isssss", $post_id, $author, $email, $content, $status, $date);
 
-        return $stmt->execute();
+        if (!$stmt->execute()) {
+            return self::ERROR_FAIL;
+        }
+
+        return self::ERROR_OK;
     }
 
     public function read(int $id)
@@ -49,7 +56,7 @@ class CommentStore extends DB
 
     public function countAllApproved(): int
     {
-        $result = self::query("SELECT COUNT(*) FROM comment WHERE status = 'approve'");
+        $result = self::query("SELECT COUNT(*) FROM comment WHERE status = 'approved'");
         $row = $result->fetch_array();
 
         return $row[0];
@@ -57,7 +64,7 @@ class CommentStore extends DB
 
     public function countAllUnapproved(): int
     {
-        $result = self::query("SELECT COUNT(*) FROM comment WHERE status = 'unapprove'");
+        $result = self::query("SELECT COUNT(*) FROM comment WHERE status = 'unapproved'");
         $row = $result->fetch_array();
 
         return $row[0];
@@ -66,19 +73,27 @@ class CommentStore extends DB
     /*
      * status: approve, unapprove
      */
-    public function updateStatus(int $id, string $status)
+    public function updateStatus(int $id, string $status): int
     {
         $query = "UPDATE comment SET status = ? WHERE id = ?";
         $stmt = self::prepare($query);
         $stmt->bind_param("si", $status, $id);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            return self::ERROR_FAIL;
+        }
+
+        return self::ERROR_OK;
     }
 
-    public function delete(int $id)
+    public function delete(int $id): int
     {
         $query = "DELETE FROM comment WHERE id = ?";
         $stmt = self::prepare($query);
         $stmt->bind_param("i", $id);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            return self::ERROR_FAIL;
+        }
+
+        return self::ERROR_OK;
     }
 }

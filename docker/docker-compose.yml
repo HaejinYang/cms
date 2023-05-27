@@ -20,4 +20,7 @@ services:
       MYSQL_USER: "${DB_USER_ID}"
       MYSQL_PASSWORD: "${DB_USER_PASSWORD}"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql/lib:/var/lib/mysql
+      - type: bind
+        source: ./mysql/conf/my.cnf
+        target: /etc/my.cnf
