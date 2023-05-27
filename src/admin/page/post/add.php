@@ -81,7 +81,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
                         <div class="form-group">
                             <label for="content">내용</label>
-                            <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
+                            <textarea id="summernote" class="form-control" name="content" id="" cols="30"
+                                      rows="10"></textarea>
                         </div>
 
                         <div class="form-group">
