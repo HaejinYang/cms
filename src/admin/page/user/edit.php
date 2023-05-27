@@ -56,12 +56,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
 
                         <div class="form-group">
                             <label for="title">비밀번호</label>
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" name="password" placeholder="기존 비밀번호를 사용한다면 비워주세요">
                         </div>
 
                         <div class="form-group">
                             <label for="title">비밀번호확인</label>
-                            <input type="password" class="form-control" name="password_check">
+                            <input type="password" class="form-control" name="password_check" placeholder="기존 비밀번호를 사용한다면 비워주세요">
                         </div>
 
                         <div class="form-group">

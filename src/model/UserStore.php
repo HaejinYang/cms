@@ -36,13 +36,13 @@ class UserStore extends DB
 
         $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/.env');
 
-        $salted_password = crypt($password, $this->salt);
+        $hashed_password = crypt($password, $this->salt);
         $registered_at = date('Y-m-d H:i:s', time() + $this->timezone_correction);
         $updated_at = $registered_at;
 
         $query = "INSERT INTO user(account, password, lastname, firstname, email, role, registered_at, updated_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = self::prepare($query);
-        $stmt->bind_param("ssssssss", $account, $salted_password, $lastname, $firstname, $email, $role, $registered_at, $updated_at);
+        $stmt->bind_param("ssssssss", $account, $hashed_password, $lastname, $firstname, $email, $role, $registered_at, $updated_at);
         $stmt->execute();
 
         return self::ERROR_OK;
@@ -116,12 +116,8 @@ class UserStore extends DB
         return $row[0];
     }
 
-    public function update(int $id, string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
+    public function update(int $id, string $account, string $lastname, string $firstname, string $email, string $role): int
     {
-        if ($this->isInvalidPassword($password, $password_check)) {
-            return self::ERROR_PASSWORD;
-        }
-
         if ($this->isDuplicateEmail($email, $id)) {
             return self::ERROR_EMAIL;
         }
@@ -130,12 +126,28 @@ class UserStore extends DB
             return self::ERROR_ACCOUNT;
         }
 
-        $salted_password = crypt($password, $this->salt);
         $updated_at = date('Y-m-d H:i:s', time() + $this->timezone_correction);
 
-        $query = "UPDATE user SET account = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ?, updated_at = ? WHERE id = ?";
+        $query = "UPDATE user SET account = ?, lastname = ?, firstname = ?, email = ?, role = ?, updated_at = ? WHERE id = ?";
         $stmt = self::prepare($query);
-        $stmt->bind_param("sssssssi", $account, $salted_password, $lastname, $firstname, $email, $role, $updated_at,);
+        $stmt->bind_param("ssssssi", $account, $lastname, $firstname, $email, $role, $updated_at, $id);
+        $stmt->execute();
+
+        return self::ERROR_OK;
+    }
+
+    public function updatePassword(int $id, string $password, string $password_check): int
+    {
+        if ($this->isInvalidPassword($password, $password_check)) {
+            return self::ERROR_PASSWORD;
+        }
+
+        $hashed_password = crypt($password, $this->salt);
+        $updated_at = date('Y-m-d H:i:s', time() + $this->timezone_correction);
+
+        $query = "UPDATE user SET password = ?, updated_at = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("ssi", $hashed_password, $updated_at, $id);
         $stmt->execute();
 
         return self::ERROR_OK;
