@@ -16,10 +16,16 @@
                     <div class="form-wrap">
                         <h1>회원가입</h1>
                         <?php
-                        if (isset($_SESSION['API_RESPONSE'])) {
-                            $msg = $_SESSION['API_RESPONSE'];
-                            unset($_SESSION['API_RESPONSE']);
-                            echo "<p>{$msg}</p>";
+                        if (isset($_SESSION['API_RESPONSE_RESULT'])) {
+                            $msg = $_SESSION['API_RESPONSE_MSG'];
+                            $is_api_success = $_SESSION['API_RESPONSE_RESULT'];
+                            unset($_SESSION['API_RESPONSE_MSG']);
+                            unset($_SESSION['API_RESPONSE_RESULT']);
+                            if ($is_api_success) {
+                                echo "<p class='bg-success'>{$msg}</p>";
+                            } else {
+                                echo "<p class='bg-danger'>{$msg}</p>";
+                            }
                         }
                         ?>
                         <form role="form" action="/api/auth/register.php" method="post" id="login-form"

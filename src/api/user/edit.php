@@ -1,8 +1,9 @@
 <?php
+session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/UserStore.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/util/response.php';
 
-$response_msg = "";
+$response_msg = "수정되었습니다.";
 $is_success = false;
 do {
     if (!isset($_POST['edit'])) {
@@ -42,8 +43,4 @@ do {
     }
 } while (false);
 
-if ($is_success) {
-    header("Location: /admin/page/user/index.php");
-} else {
-    echo goBackWithAlert($response_msg);
-}
+echo goBackWithSession(["API_RESPONSE_RESULT" => $is_success, "API_RESPONSE_MSG" => $response_msg]);

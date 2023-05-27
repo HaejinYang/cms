@@ -44,4 +44,4 @@ do {
     }
 } while (false);
 
-echo goBackWithSession(["API_RESPONSE" => $response_msg]);
+echo goBackWithSession(["API_RESPONSE_RESULT" => $is_success, "API_RESPONSE_MSG" => $response_msg]);
