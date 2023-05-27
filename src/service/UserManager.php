@@ -10,16 +10,21 @@ class UserManager
     private string $account;
     private string $password;
 
+    public function __construct()
+    {
+
+    }
+
     public function login(&$user, string $account, string $password): int
     {
         try {
-            $user_dao = new UserStore();
-            $result = $user_dao->readByAccount($user, $account);
+            $user_store = new UserStore();
+            $result = $user_store->readByAccount($user, $account);
             if ($result !== UserStore::ERROR_OK) {
                 return self::ERROR_NO_ACCOUNT;
             }
 
-            if ($user['password'] !== $password) {
+            if (!$user_store->isSamePassword($password, $user['password'])) {
                 return self::ERROR_PASSWORD;
             }
         } catch (mysqli_sql_exception $e) {

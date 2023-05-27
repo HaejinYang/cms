@@ -10,6 +10,16 @@ class UserStore extends DB
     const ERROR_ID = 4;
     const ERROR_ROLE = 5;
 
+    private string $salt;
+    private int $timezone_correction;
+
+    public function __construct()
+    {
+        $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/.env');
+        $this->salt = $env['SALT'];
+        $this->timezone_correction = $env['TIMEZONE_CORRECTION'];
+    }
+
     public function create(string $account, string $password, string $password_check, string $lastname, string $firstname, string $email, string $role): int
     {
         if ($this->isInvalidPassword($password, $password_check)) {
@@ -24,9 +34,15 @@ class UserStore extends DB
             return self::ERROR_ACCOUNT;
         }
 
-        $query = "INSERT INTO user(account, password, lastname, firstname, email, role) VALUES(?, ?, ?, ?, ?, ?)";
+        $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/.env');
+
+        $salted_password = crypt($password, $this->salt);
+        $registered_at = date('Y-m-d H:i:s', time() + $this->timezone_correction);
+        $updated_at = $registered_at;
+
+        $query = "INSERT INTO user(account, password, lastname, firstname, email, role, registered_at, updated_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = self::prepare($query);
-        $stmt->bind_param("ssssss", $account, $password, $lastname, $firstname, $email, $role);
+        $stmt->bind_param("ssssssss", $account, $salted_password, $lastname, $firstname, $email, $role, $registered_at, $updated_at);
         $stmt->execute();
 
         return self::ERROR_OK;
@@ -72,6 +88,7 @@ class UserStore extends DB
     {
         $query = "SELECT * FROM user";
         $result = self::query($query);
+
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -113,9 +130,12 @@ class UserStore extends DB
             return self::ERROR_ACCOUNT;
         }
 
-        $query = "UPDATE user SET account = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ? WHERE id = ?";
+        $salted_password = crypt($password, $this->salt);
+        $updated_at = date('Y-m-d H:i:s', time() + $this->timezone_correction);
+
+        $query = "UPDATE user SET account = ?, password = ?, lastname = ?, firstname = ?, email = ?, role = ?, updated_at = ? WHERE id = ?";
         $stmt = self::prepare($query);
-        $stmt->bind_param("ssssssi", $account, $password, $lastname, $firstname, $email, $role, $id);
+        $stmt->bind_param("sssssssi", $account, $salted_password, $lastname, $firstname, $email, $role, $updated_at,);
         $stmt->execute();
 
         return self::ERROR_OK;
@@ -131,9 +151,11 @@ class UserStore extends DB
             return self::ERROR_ROLE;
         }
 
-        $query = "UPDATE user SET role = ? WHERE id = ?";
+        $updated_at = date('Y-m-d H:i:s', time() + $this->timezone_correction);
+
+        $query = "UPDATE user SET role = ?, updated_at = ? WHERE id = ?";
         $stmt = self::prepare($query);
-        $stmt->bind_param("si", $role, $id);
+        $stmt->bind_param("ssi", $role, $updated_at, $id);
         $stmt->execute();
 
         return self::ERROR_OK;
@@ -202,6 +224,13 @@ class UserStore extends DB
         $result = $stmt->get_result();
 
         return $result->num_rows !== 0;
+    }
+
+    public function isSamePassword(string $request, string $hashed): bool
+    {
+        $compared = crypt($request, $this->salt);
+
+        return hash_equals($hashed, $compared);
     }
 
     private function isDuplicateAccount(string $account, int $except_id = -1): bool

@@ -15,11 +15,18 @@
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
                         <h1>회원가입</h1>
+                        <?php
+                        if (isset($_SESSION['API_RESPONSE'])) {
+                            $msg = $_SESSION['API_RESPONSE'];
+                            unset($_SESSION['API_RESPONSE']);
+                            echo "<p>{$msg}</p>";
+                        }
+                        ?>
                         <form role="form" action="/api/auth/register.php" method="post" id="login-form"
                               autocomplete="off">
                             <div class="form-group">
-                                <label for="username" class="sr-only">아이디</label>
-                                <input type="text" name="username" id="username" class="form-control"
+                                <label for="account" class="sr-only">아이디</label>
+                                <input type="text" name="account" id="username" class="form-control"
                                        placeholder="아이디">
                             </div>
                             <div class="form-group">
@@ -31,6 +38,12 @@
                                 <label for="password" class="sr-only">비밀번호</label>
                                 <input type="password" name="password" id="key" class="form-control"
                                        placeholder="비밀번호">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="sr-only">비밀번호확인</label>
+                                <input type="password" name="password_check" id="key" class="form-control"
+                                       placeholder="비밀번호확인">
                             </div>
 
                             <input type="submit" name="register" id="btn-login" class="btn btn-custom btn-lg btn-block"
