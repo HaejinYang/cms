@@ -12,7 +12,7 @@ do {
     }
 
     $id = $_GET['id'];
-    $status = "approved"d";
+    $status = "approved";
     try {
         $comment_dao = new CommentStore();
         $result = $comment_dao->updateStatus($id, $status);
