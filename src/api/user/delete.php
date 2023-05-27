@@ -28,5 +28,5 @@ do {
 if ($is_success) {
     header("Location: /admin/page/user/index.php");
 } else {
-    echo goBackWithResponse($response_msg);
+    echo goBackWithAlert($response_msg);
 }

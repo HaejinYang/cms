@@ -42,5 +42,5 @@ do {
 if ($is_success) {
     header("Location: /admin/page/post/index.php");
 } else {
-    echo goBackWithResponse($response_msg);
+    echo goBackWithAlert($response_msg);
 }

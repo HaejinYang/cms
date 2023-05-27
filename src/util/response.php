@@ -1,6 +1,6 @@
 <?php
 
-function goBackWithResponse($msg): string
+function goBackWithAlert($msg): string
 {
     $response = "
     <script>

@@ -193,6 +193,17 @@ class UserStore extends DB
         return $msg;
     }
 
+    public function isDuplicated(string $account, string $email): bool
+    {
+        $query = "SELECT * FROM user WHERE account = ? OR email = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("ss", $account, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows !== 0;
+    }
+
     private function isDuplicateAccount(string $account, int $except_id = -1): bool
     {
         $query = "SELECT * FROM user WHERE account = ?";
