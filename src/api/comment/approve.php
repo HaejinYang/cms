@@ -14,4 +14,3 @@ do {
 } while (false);
 
 header("Location: /admin/page/comment/index.php");
-

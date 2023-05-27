@@ -9,6 +9,9 @@
 
 <script src="/admin/summernote-0.8.18-dist/summernote.min.js"></script>
 
+<!-- 어드민 전용 js -->
+<script src="/admin/js/admin.js"></script>
+
 <!-- summernote 위지위그 -->
 <script>
     $(document).ready(function () {

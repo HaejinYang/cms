@@ -73,7 +73,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public function countAllPublish(): int
     {
-        $result = self::query("SELECT COUNT(*) FROM post WHERE status = 'publish'");
+        $result = self::query("SELECT COUNT(*) FROM post WHERE status = 'published'");
         $row = $result->fetch_array();
 
         return $row[0];
@@ -116,6 +116,14 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt->execute();
     }
 
+    public function updateStatus(int $id, string $status)
+    {
+        $query = "UPDATE post SET status = ? WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("si", $status, $id);
+        $stmt->execute();
+    }
+
     public function delete(int $id)
     {
         $query = "DELETE FROM post WHERE id = ?";
@@ -129,13 +137,13 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
      */
     public static function getStatus(): array
     {
-        $status = ["draft" => "보류", "publish" => "공개"];
+        $status = ["draft" => "보류", "published" => "공개"];
 
         return $status;
     }
 
     public static function isPublished($status): bool
     {
-        return $status === "publish";
+        return $status === "published";
     }
 }

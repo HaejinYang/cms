@@ -92,7 +92,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/layout/header.php' ?>
                                 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/PostStore.php';
                                 $status = $row['status'];
                                 $status_arr = PostStore::getStatus();
-                                $options = ["draft" => "<option value='draft' ", "publish" => "<option value='publish'"];
+                                $options = ["draft" => "<option value='draft' ", "published" => "<option value='published'"];
                                 $html = "";
                                 foreach ($options as $key => $el) {
                                     if ($key === $status) {
