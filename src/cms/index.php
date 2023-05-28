@@ -12,8 +12,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
+                게시글
             </h1>
 
             <!-- First Blog Post -->
