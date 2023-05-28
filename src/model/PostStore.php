@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/db/DB.php';
 
 class PostStore extends DB
@@ -109,6 +108,14 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         move_uploaded_file($image_temp_path, $_SERVER['DOCUMENT_ROOT'] . '/images/' . $image);
 
         return $result;
+    }
+
+    public function updateViews(int $id): void
+    {
+        $query = "UPDATE post SET views = views + 1 WHERE id = ?";
+        $stmt = self::prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
     }
 
     public function updateCommentCount(int $id): int

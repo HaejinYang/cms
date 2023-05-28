@@ -34,7 +34,7 @@ foreach ($rows as $row) {
                 <p class="lead">
                     by <a href="/cms/index.php?author={$row['author']}">{$row['author']}</a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {$row['date']}</p>
+                <p><span class="glyphicon glyphicon-time"></span> 게시일 {$row['date']}</p>
                 <hr>
                 <a href="/cms/page/post/index.php?id={$row['id']}"><img class="img-responsive" src="/{$row['image']} " alt=""></a>
                 <hr>

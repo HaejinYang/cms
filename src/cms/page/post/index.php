@@ -32,6 +32,7 @@
                     break;
                 }
 
+                $post->updateViews($id);
                 $content = $row['content'];
                 $html = <<<EOT
                         <h1>{$row['title']}</h1>
@@ -41,7 +42,8 @@
                         
                         <hr>
                         
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on {$row['date']}</p>
+                        <p><span class="glyphicon glyphicon-time"></span> {$row['date']}  
+                            <span class="glyphicon glyphicon-eye-open"></span> {$row['views']}</p>
                         
                         <hr>
                         
